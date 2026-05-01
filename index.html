@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>'Hallway of Hope' Project Manager</title>
+  <style>
+    :root{
+      --bg:#f5f5f2; --panel:#ffffff; --ink:#1e252b; --muted:#6b7280; --line:#d9ddd8;
+      --weekend:#f3f4f6; --kr:#ffe8a3; --sg:#cdeffd; --both:#e9d5ff;
+      --shadow:0 10px 30px rgba(20,30,40,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;}
+    header{padding:28px 32px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f9faf7)}
+    h1{margin:0 0 6px;font-size:28px;letter-spacing:-.03em}.subtitle{color:var(--muted);font-size:14px}.security-warning{margin-top:12px;padding:12px 14px;border:1px solid #f59e0b;border-left:6px solid #f59e0b;border-radius:14px;background:#fffbeb;color:#78350f;font-size:13px;line-height:1.45}.security-warning b{display:block;font-size:14px;margin-bottom:3px}
+    .app{display:grid;grid-template-columns:360px 1fr;gap:18px;padding:18px;max-width:1600px;margin:auto}.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+    .side{padding:18px;position:sticky;top:14px;height:calc(100vh - 28px);overflow:auto}.side h2,.calendar h2{font-size:16px;margin:0 0 12px;letter-spacing:-.02em}
+    label{display:block;font-size:12px;font-weight:700;color:#374151;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid #ccd1d5;border-radius:12px;padding:10px 11px;font:inherit;background:#fff}textarea{min-height:70px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}button{border:0;border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;background:#111827;color:#fff}button.secondary{background:#eef0f2;color:#111827}button.danger{background:#fee2e2;color:#991b1b}.legend{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.chip{font-size:12px;padding:6px 9px;border-radius:999px;background:#eef0f2}.chip.kr{background:var(--kr)}.chip.sg{background:var(--sg)}.chip.both{background:var(--both)}
+    .category-color-list{margin:10px 0 14px;border:1px solid var(--line);border-radius:14px;overflow:hidden}.cat-color-row{display:grid;grid-template-columns:1fr 54px;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--line);font-size:12px}.cat-color-row:last-child{border-bottom:0}.cat-color-row input{padding:2px;height:34px;border-radius:8px}
+    .task-list{margin-top:16px}.task-card{border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px;background:#fafafa}.task-card b{display:block;font-size:13px}.task-card small{display:block;color:var(--muted);margin-top:4px}.task-actions{display:flex;gap:6px;margin-top:10px}.task-actions button{padding:7px 10px;font-size:12px}
+    .calendar{padding:18px;overflow:auto}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px;position:sticky;left:0;background:var(--panel);z-index:5}.calendar-wrap{min-width:980px}.week{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;margin-bottom:16px}.week-title{padding:12px 14px;background:#f8fafc;border-bottom:1px solid var(--line);font-weight:800;display:flex;justify-content:space-between;gap:12px;align-items:center}.week-title small{font-weight:500;color:var(--muted)}
+    .days-header,.days-grid{display:grid;grid-template-columns:repeat(7,1fr)}.days-header div{padding:8px;text-align:center;font-size:12px;font-weight:800;background:#fbfbfb;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.days-header div:last-child{border-right:0}.day-cell{min-height:138px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px;background:#fff;position:relative}.day-cell:nth-child(7n){border-right:0}.day-cell.weekend{background:var(--weekend)}.date-line{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}.date-num{font-size:13px;font-weight:800}.date-month{font-size:10px;color:var(--muted)}.outside{opacity:.28}.holiday-box{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px}.hlabel{font-size:9px;padding:2px 4px;border-radius:5px;font-weight:800}.hlabel.kr{background:var(--kr)}.hlabel.sg{background:var(--sg)}.hname{font-size:9px;color:#475569;line-height:1.2;margin-bottom:2px}
+    .task-pill{display:block;width:100%;border-radius:8px;color:#fff;margin:3px 0;padding:4px 6px;font-size:10.5px;font-weight:800;line-height:1.15;box-shadow:0 2px 4px rgba(0,0,0,.15);cursor:pointer;position:relative;overflow:hidden}.task-pill .progress{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.28)}.task-pill span{position:relative;z-index:1}.task-pill.continue-left{border-top-left-radius:2px;border-bottom-left-radius:2px}.task-pill.continue-right{border-top-right-radius:2px;border-bottom-right-radius:2px}.travel-pill{display:block;width:100%;margin:3px 0;padding:2px 0;font-size:10.5px;font-weight:700;line-height:1.2;color:#374151;background:transparent;box-shadow:none;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.travel-pill:hover{text-decoration:underline}.travel-line{margin-top:5px;padding-top:4px;border-top:1px dashed #d1d5db;font-size:10.5px;line-height:1.25;color:#374151;white-space:normal}.travel-name{cursor:pointer}.travel-name:hover{text-decoration:underline}.travel-label{font-weight:800;color:#6b7280}.more{font-size:10px;color:var(--muted);margin-top:4px}
+
+    .top-tabs{display:flex;gap:8px;padding:14px 32px 0;background:#f9faf7}.tab-btn{background:#e5e7eb;color:#111827}.tab-btn.active{background:#111827;color:#fff}.hidden{display:none!important}
+    .report-app{padding:18px;max-width:1600px;margin:auto}.report-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.report-editor{padding:18px}.report-history{padding:18px;max-height:calc(100vh - 150px);overflow:auto}.report-date-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px}.report-date-row input{max-width:220px}.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.party-box{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fbfbfb}.party-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.party-name{font-size:18px;font-weight:900}.party-name.xorbis{color:#2563eb}.party-name.twok{color:#0f766e}.report-section{margin-top:12px}.report-section textarea{min-height:110px;background:#fff}.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.history-card{border:1px solid var(--line);border-radius:16px;background:#fafafa;margin-bottom:10px;overflow:hidden}.history-card button{border-radius:0;width:100%;text-align:left;background:#fff;color:#111827;padding:12px 14px}.history-card button:hover{background:#f3f4f6}.history-meta{font-size:12px;color:var(--muted);margin-top:3px}.history-detail{padding:0 14px 14px;font-size:12px;color:#374151;line-height:1.5}.history-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.history-mini{border-left:4px solid #d1d5db;padding-left:8px;white-space:pre-wrap}.history-mini.xorbis{border-color:#2563eb}.history-mini.twok{border-color:#0f766e}.search-row{display:flex;gap:8px;margin-bottom:12px}.search-row input{flex:1}.print-area-title{display:none}
+
+    .travel-app{padding:18px;max-width:1600px;margin:auto}.travel-layout{display:grid;grid-template-columns:420px 1fr;gap:18px}.travel-editor,.travel-list-panel{padding:18px}.travel-card{border:1px solid var(--line);border-radius:16px;background:#fafafa;margin-bottom:10px;padding:12px;border-left:8px solid #6366f1}.travel-card b{display:block;font-size:14px}.travel-card small{display:block;color:var(--muted);margin-top:4px}.travel-actions{display:flex;gap:6px;margin-top:10px}.travel-actions button{padding:7px 10px;font-size:12px}.travel-period{font-weight:800;color:#374151}.travel-note{white-space:pre-wrap;color:#374151;font-size:12px;margin-top:6px}.travel-status{font-size:12px;color:var(--muted);margin-top:10px}
+    @media print{header,.top-tabs,.side,.report-history,.report-actions,.toolbar{display:none!important}.app,.report-app{display:block;padding:0}.panel{box-shadow:none;border:0}.calendar{display:none}.print-area-title{display:block}body{background:#fff}.report-layout{display:block}.report-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:900px){.report-layout,.report-grid{grid-template-columns:1fr}.report-history{max-height:none}}
+    .notice{font-size:12px;color:var(--muted);line-height:1.55;margin-top:10px}.file-input{font-size:12px} @media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.calendar-wrap{min-width:840px}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>'Hallway of Hope' Project Manager</h1>
+  <div class="subtitle">2026년 5월–8월 · Schedule + Daily Report · Xorbis / 2K 일일 히스토리 관리</div>
+  <div class="security-warning">
+    <b>경고: 대외 보안준수 / Warning: External Security & Confidentiality Compliance</b>
+    본 문서는 Hallway of Hope 프로젝트 관계자 전용 자료입니다. 외부 공유, 무단 복제, 재배포를 금지합니다.<br>
+    This document is intended only for authorized Hallway of Hope project stakeholders. External sharing, unauthorized copying, and redistribution are prohibited.
+  </div>
+</header>
+<nav class="top-tabs"><button id="scheduleTabBtn" class="tab-btn active" onclick="showTab('schedule')">Schedule</button><button id="reportTabBtn" class="tab-btn" onclick="showTab('report')">Daily Report</button><button id="travelTabBtn" class="tab-btn" onclick="showTab('travel')">Business Trip</button></nav>
+<main class="app" id="scheduleTab">
+  <aside class="panel side">
+    <h2>일정 추가 / 수정</h2>
+    <input type="hidden" id="editId" />
+    <label>항목</label>
+    <select id="category"></select>
+    <label>일정명</label>
+    <input id="title" placeholder="예: Zone A 1차 리뷰" />
+    <div class="row">
+      <div><label>시작일</label><input id="start" type="date" min="2026-05-01" max="2026-08-31" /></div>
+      <div><label>종료일</label><input id="end" type="date" min="2026-05-01" max="2026-08-31" /></div>
+    </div>
+    <label>진행률</label>
+    <input id="progress" type="number" min="0" max="100" value="0" />
+    <label>메모</label>
+    <textarea id="note" placeholder="승인, 담당자, 리스크 등을 입력"></textarea>
+    <div class="btns"><button onclick="saveTask()">저장</button><button class="secondary" onclick="clearForm()">새로 입력</button><button class="danger" onclick="resetSample()">샘플 초기화</button></div>
+
+    <h2 style="margin-top:22px">항목별 색상</h2>
+    <div class="category-color-list" id="categoryColors"></div>
+    <div class="btns"><button class="secondary" onclick="resetColors()">색상 초기화</button></div>
+
+    <div class="legend"><span class="chip kr">KR 공휴일</span><span class="chip sg">SG 공휴일</span><span class="chip">주말</span></div>
+
+    <h2 style="margin-top:20px">데이터</h2>
+    <div class="btns"><button class="secondary" onclick="downloadJSON()">JSON 저장</button><button class="secondary" onclick="downloadCSV()">CSV 저장</button><button class="secondary" onclick="downloadNotionCSV()">Notion CSV</button></div>
+    <label>JSON 불러오기</label><input class="file-input" type="file" accept="application/json" onchange="importJSON(event)" />
+    <p class="notice">이 버전은 월별 구분 없이 주 단위 7칸 캘린더로 표시됩니다. 일정 색상은 개별 일정이 아니라 항목별 색상을 따라갑니다.</p>
+    <div class="task-list" id="taskList"></div>
+  </aside>
+  <section class="panel calendar">
+    <div class="toolbar"><h2>7-Day Weekly Calendar View</h2><div class="holiday-note">기간: 2026.05.01 – 2026.08.31</div></div>
+    <div class="calendar-wrap" id="calendarWrap"></div>
+  </section>
+</main>
+<section class="report-app hidden" id="reportTab">
+  <div class="report-layout">
+    <section class="panel report-editor">
+      <h2>Daily Report · 일일보고</h2>
+      <div class="report-date-row">
+        <div><label>보고 날짜</label><input id="reportDate" type="date" min="2026-05-01" max="2026-08-31"></div>
+        <div class="btns"><button onclick="saveReport()">보고 저장</button><button class="secondary" onclick="clearReportForm()">새 보고서</button><button class="secondary" onclick="printReport()">인쇄 / PDF</button></div>
+      </div>
+      <h1 class="print-area-title">Daily Report</h1>
+      <div class="report-grid">
+        <div class="party-box">
+          <div class="party-head"><span class="party-name xorbis">Xorbis</span></div>
+          <div class="report-section"><label>1. 금일 작업 진행사항 / Today’s Work Progress</label><textarea id="xorbisToday" placeholder="오늘 진행한 작업, 현장 이슈, 승인/리뷰 사항 / Work completed today, site issues, approvals or review items"></textarea></div>
+          <div class="report-section"><label>2. 익일 To-Do List / Tomorrow’s To-Do List</label><textarea id="xorbisTomorrow" placeholder="내일 진행할 작업, 준비물, 담당자 / Tomorrow’s tasks, preparations, responsible persons"></textarea></div>
+          <div class="report-section"><label>3. 미해결사항 및 기타 / Open Issues & Others</label><textarea id="xorbisIssues" placeholder="미해결 이슈, RFI, 확인 필요 사항, 기타 메모 / Open issues, RFIs, items to confirm, other notes"></textarea></div>
+        </div>
+        <div class="party-box">
+          <div class="party-head"><span class="party-name twok">2K</span></div>
+          <div class="report-section"><label>1. 금일 작업 진행사항 / Today’s Work Progress</label><textarea id="twokToday" placeholder="오늘 진행한 작업, 현장 이슈, 승인/리뷰 사항 / Work completed today, site issues, approvals or review items"></textarea></div>
+          <div class="report-section"><label>2. 익일 To-Do List / Tomorrow’s To-Do List</label><textarea id="twokTomorrow" placeholder="내일 진행할 작업, 준비물, 담당자 / Tomorrow’s tasks, preparations, responsible persons"></textarea></div>
+          <div class="report-section"><label>3. 미해결사항 및 기타 / Open Issues & Others</label><textarea id="twokIssues" placeholder="미해결 이슈, RFI, 확인 필요 사항, 기타 메모 / Open issues, RFIs, items to confirm, other notes"></textarea></div>
+        </div>
+      </div>
+      <div class="report-actions"><button class="secondary" onclick="downloadReportsJSON()">Report JSON 저장</button><button class="secondary" onclick="downloadReportsCSV()">Report CSV 저장</button><button class="danger" onclick="deleteCurrentReport()">현재 날짜 보고 삭제</button></div>
+      <p class="notice">보고서는 날짜별로 자동 저장되며, 오른쪽 History List에서 과거 기록을 다시 열 수 있습니다.</p>
+    </section>
+    <aside class="panel report-history">
+      <h2>History List</h2>
+      <div class="search-row"><input id="reportSearch" placeholder="검색: 날짜, 이슈, 작업 내용" oninput="renderReportHistory()"><button class="secondary" onclick="reportSearch.value='';renderReportHistory()">Clear</button></div>
+      <div id="reportHistoryList"></div>
+    </aside>
+  </div>
+</section>
+
+<section class="travel-app hidden" id="travelTab">
+  <div class="travel-layout">
+    <section class="panel travel-editor">
+      <h2>Business Trip · 출장자 관리</h2>
+      <input type="hidden" id="travelEditId" />
+      <label>사람 이름 / Name</label>
+      <input id="travelName" placeholder="예: Kevin / Lim / Dean" />
+      <div class="row">
+        <div><label>출장 시작일 / Start</label><input id="travelStart" type="date" min="2026-05-01" max="2026-08-31" /></div>
+        <div><label>출장 종료일 / End</label><input id="travelEnd" type="date" min="2026-05-01" max="2026-08-31" /></div>
+      </div>
+      <label>메모 / Note</label>
+      <textarea id="travelNote" placeholder="역할, 소속, 항공편, 숙소, 현장 투입 일정 등을 입력"></textarea>
+      <div class="btns"><button onclick="saveTravel()">출장 일정 저장</button><button class="secondary" onclick="clearTravelForm()">새 출장자 추가</button></div>
+      <p class="notice">출장자 이름과 출장기간을 Google Sheet의 Travel 탭에 저장합니다. 수정은 리스트에서 항목을 선택한 뒤 저장하세요.</p>
+    </section>
+    <section class="panel travel-list-panel">
+      <div class="toolbar"><h2>출장 히스토리 / Business Trip List</h2><div class="holiday-note">2026.05.01 – 2026.08.31</div></div>
+      <div class="search-row"><input id="travelSearch" placeholder="검색: 이름, 기간, 메모" oninput="renderTravelList()"><button class="secondary" onclick="travelSearch.value='';renderTravelList()">Clear</button></div>
+      <div class="btns"><button class="secondary" onclick="downloadTravelCSV()">Travel CSV 저장</button><button class="secondary" onclick="loadTravelFromSheet()">새로고침</button></div>
+      <p class="travel-status" id="travelStatus"></p>
+      <div id="travelList"></div>
+    </section>
+  </div>
+</section>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbxYpj5rbXZh3p3WIZB9SRA7-uEj_3FWLc5Whx_qUC_xwcoBIw8hu_keBMpMKSUay_Vjuw/exec';
+
+const categories = ['현장시공','콘텐츠 ZoneA','콘텐츠 ZoneB','콘텐츠 ZoneC','콘텐츠 존D','그래피티X','HW 설치','빔프로젝터 설치','SW 설치','리뷰 및 보고'];
+const defaultColors = {
+  '현장시공':'#f97316', '콘텐츠 ZoneA':'#2563eb', '콘텐츠 ZoneB':'#0ea5e9', '콘텐츠 ZoneC':'#0f766e', '콘텐츠 존D':'#7c3aed',
+  '그래피티X':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터 설치':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
+};
+let categoryColors = {...defaultColors};
+const rangeStart = new Date('2026-05-01T00:00:00');
+const rangeEnd = new Date('2026-08-31T00:00:00');
+const calendarStart = startOfWeek(rangeStart); // Sunday start
+const calendarEnd = endOfWeek(rangeEnd);
+const holidays = {
+  '2026-05-01': [
+    {country:'KR', name:'노동절 / Labour Day'},
+    {country:'SG', name:'Labour Day'}
+  ],
+  '2026-05-04': [{country:'KR', name:'징검다리휴일 / Bridge Holiday'}],
+  '2026-05-05': [{country:'KR', name:'어린이날 / Children’s Day'}],
+  '2026-05-24': [{country:'KR', name:'부처님오신날 / Buddha’s Birthday'}],
+  '2026-05-25': [{country:'KR', name:'대체휴일 / Substitute Holiday'}],
+  '2026-05-27': [{country:'SG', name:'Hari Raya Haji'}],
+  '2026-06-01': [{country:'SG', name:'Vesak Day Substitute Holiday'}],
+  '2026-06-03': [{country:'KR', name:'지방자치선거 / Local Election'}],
+  '2026-06-06': [{country:'KR', name:'현충일 / Memorial Day'}],
+  '2026-07-17': [{country:'KR', name:'제헌절 / Constitution Day'}],
+  '2026-08-09': [{country:'SG', name:'National Day'}],
+  '2026-08-10': [{country:'SG', name:'National Day Substitute Holiday'}]
+};
+let tasks = [];
+const sampleTasks = [
+  {id:crypto.randomUUID(),category:'현장시공',title:'Hoarding / Site Preparation',start:'2026-05-01',end:'2026-05-18',progress:30,note:'현장 준비 및 임시 구조물'},
+  {id:crypto.randomUUID(),category:'콘텐츠 ZoneA',title:'Zone A Content Production',start:'2026-05-06',end:'2026-06-10',progress:45,note:'Rising Sea Level'},
+  {id:crypto.randomUUID(),category:'콘텐츠 ZoneB',title:'Zone B Content Production',start:'2026-05-13',end:'2026-06-18',progress:40,note:'The Tipping Point'},
+  {id:crypto.randomUUID(),category:'콘텐츠 ZoneC',title:'Zone C Content / Hallway of Hope',start:'2026-05-20',end:'2026-07-08',progress:35,note:'메인 몰입 콘텐츠'},
+  {id:crypto.randomUUID(),category:'콘텐츠 존D',title:'Zone D Content',start:'2026-06-03',end:'2026-07-16',progress:20,note:''},
+  {id:crypto.randomUUID(),category:'그래피티X',title:'Graffiti X AI Pipeline & UI',start:'2026-05-15',end:'2026-07-25',progress:25,note:'AI drawing interaction'},
+  {id:crypto.randomUUID(),category:'HW 설치',title:'Hardware Installation',start:'2026-06-17',end:'2026-07-20',progress:10,note:''},
+  {id:crypto.randomUUID(),category:'빔프로젝터 설치',title:'Projector Mounting & Alignment',start:'2026-07-01',end:'2026-08-05',progress:0,note:''},
+  {id:crypto.randomUUID(),category:'SW 설치',title:'Software / Media Server Setup',start:'2026-07-14',end:'2026-08-12',progress:0,note:''},
+  {id:crypto.randomUUID(),category:'리뷰 및 보고',title:'Weekly Review & Reports',start:'2026-05-05',end:'2026-08-29',progress:0,note:'매주 리뷰/보고'}
+];
+
+function fmt(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return y + "-" + m + "-" + day;
+}
+function dateObj(s){return new Date(s+'T00:00:00')}
+function addDays(d,n){const x=new Date(d); x.setDate(x.getDate()+n); return x}
+function startOfWeek(d){const x=new Date(d); x.setDate(x.getDate()-x.getDay()); return new Date(x.getFullYear(),x.getMonth(),x.getDate())}
+function endOfWeek(d){const x=startOfWeek(d); x.setDate(x.getDate()+6); return x}
+function safeText(value){ return value == null ? '' : String(value); }
+
+async function apiGet(action){
+  const res = await fetch(API_URL + '?action=' + encodeURIComponent(action) + '&_=' + Date.now(), { method:'GET', cache:'no-store' });
+  if(!res.ok) throw new Error('API GET failed: ' + res.status);
+  return await res.json();
+}
+async function apiPost(action, payload){
+  const res = await fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body:JSON.stringify({ action, payload })
+  });
+  if(!res.ok) throw new Error('API POST failed: ' + res.status);
+  const result = await res.json();
+  if(!result || result.success !== true){
+    throw new Error(result?.message || 'API returned success:false');
+  }
+  return result;
+}
+
+async function load(){
+  const savedColors=localStorage.getItem('scheduleCategoryColors2026Weekly');
+  categoryColors=savedColors?{...defaultColors,...JSON.parse(savedColors)}:{...defaultColors};
+  initCategory();
+  render();
+  await loadScheduleFromSheet();
+}
+async function loadScheduleFromSheet(){
+  try{
+    const data = await apiGet('getSchedule');
+    tasks = Array.isArray(data) ? data.filter(t => t && t.id !== '') : [];
+    render();
+  }catch(err){
+    console.error(err);
+    alert('Google Sheet에서 Schedule 데이터를 불러오지 못했습니다. Apps Script 배포 권한과 시트 탭 이름을 확인해주세요.\n\n' + err.message);
+  }
+}
+function persist(){ localStorage.setItem('scheduleCategoryColors2026Weekly',JSON.stringify(categoryColors)); }
+function initCategory(){ const sel=document.getElementById('category'); sel.innerHTML=categories.map(c=>`<option>${c}</option>`).join(''); document.getElementById('start').value='2026-05-01'; document.getElementById('end').value='2026-05-07'; }
+async function saveTask(){
+  const id=document.getElementById('editId').value || crypto.randomUUID();
+  const t={id, category:category.value, title:title.value.trim() || category.value, start:start.value, end:end.value, progress:Math.max(0,Math.min(100,Number(progress.value)||0)), note:note.value.trim(), updatedBy:''};
+  if(!t.start||!t.end) return alert('시작일과 종료일을 입력하세요.');
+  if(dateObj(t.start)>dateObj(t.end)) return alert('종료일은 시작일 이후여야 합니다.');
+  if(dateObj(t.start)<rangeStart || dateObj(t.end)>rangeEnd) return alert('2026년 5월 1일부터 8월 31일 사이로 입력하세요.');
+  try{
+    await apiPost('saveSchedule', t);
+    await loadScheduleFromSheet();
+    clearForm();
+    alert('Schedule이 Google Sheet에 저장되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('Schedule 저장 실패: ' + err.message);
+  }
+}
+function clearForm(){ editId.value=''; title.value=''; start.value='2026-05-01'; end.value='2026-05-07'; progress.value=0; note.value=''; }
+function editTask(id){ const t=tasks.find(x=>x.id===id); if(!t)return; editId.value=t.id; category.value=t.category; title.value=t.title; start.value=t.start; end.value=t.end; progress.value=t.progress; note.value=t.note||''; window.scrollTo({top:0,behavior:'smooth'}); }
+async function deleteTask(id){
+  const targetId = String(id || '').trim();
+  const t = tasks.find(x => String(x.id).trim() === targetId);
+  const label = t ? `${t.title} (${t.start} – ${t.end})` : targetId;
+  if(!confirm('이 일정을 Google Sheet에서 삭제할까요?\n' + label)) return;
+  try{
+    await apiPost('deleteSchedule', { id: targetId });
+
+    await loadScheduleFromSheet();
+    clearForm();
+    alert('일정이 삭제되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('Schedule 삭제 실패: ' + err.message + '\n\nGoogle Sheet에서 실제로 삭제되지 않았습니다. Apps Script 재배포와 deleteSchedule 함수를 확인해주세요.');
+    await loadScheduleFromSheet();
+  }
+}
+async function resetSample(){
+  if(!confirm('샘플 일정을 Google Sheet에 추가할까요? 기존 행은 삭제되지 않고, 샘플 행이 추가/업데이트됩니다.')) return;
+  try{
+    for(const t of sampleTasks.map(t=>({...t,id:crypto.randomUUID(),updatedBy:''}))){ await apiPost('saveSchedule', t); }
+    await loadScheduleFromSheet();
+    alert('샘플 일정이 Google Sheet에 저장되었습니다.');
+  }catch(err){ alert('샘플 저장 실패: ' + err.message); }
+}
+function resetColors(){ if(confirm('항목별 색상을 기본값으로 되돌릴까요?')){categoryColors={...defaultColors}; persist(); render();}}
+function updateCatColor(cat,val){ categoryColors[cat]=val; persist(); render(); }
+function render(){ renderCategoryColors(); renderList(); renderCalendar(); }
+function renderCategoryColors(){ document.getElementById('categoryColors').innerHTML = categories.map(c=>`<div class="cat-color-row"><strong>${c}</strong><input type="color" value="${categoryColors[c]}" onchange="updateCatColor('${c}',this.value)"></div>`).join(''); }
+function renderList(){ taskList.innerHTML = tasks.slice().sort((a,b)=>safeText(a.start).localeCompare(safeText(b.start))).map(t=>`<div class="task-card" style="border-left:8px solid ${categoryColors[t.category]||'#111827'}"><b>${escapeHtml(t.title)}</b><small>${escapeHtml(t.category)} · ${escapeHtml(t.start)} – ${escapeHtml(t.end)} · ${escapeHtml(t.progress)}%</small><small>${escapeHtml(t.note||'')}</small><div class="task-actions"><button class="secondary" onclick="editTask('${t.id}')">수정</button><button class="danger" onclick="deleteTask('${t.id}')">삭제</button></div></div>`).join(''); }
+function renderCalendar(){
+  let html = '';
+  for(let ws=new Date(calendarStart); ws<=calendarEnd; ws=addDays(ws,7)){
+    const we=addDays(ws,6);
+    html += `<div class="week"><div class="week-title"><span>${fmt(ws)} – ${fmt(we)}</span><small>Sun–Sat</small></div>`;
+    html += `<div class="days-header"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>`;
+    html += `<div class="days-grid">`;
+    for(let i=0;i<7;i++){
+      const cur=addDays(ws,i); const key=fmt(cur); const inRange=cur>=rangeStart && cur<=rangeEnd; const isWeekend=cur.getDay()===0||cur.getDay()===6; const hs=holidays[key]||[];
+      const dayTasks=tasks.filter(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur).sort((a,b)=>categories.indexOf(a.category)-categories.indexOf(b.category));
+      const dayTravel=travelItems.filter(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur).sort((a,b)=>safeText(a.name).localeCompare(safeText(b.name)));
+      html += `<div class="day-cell ${isWeekend?'weekend':''} ${inRange?'':'outside'}">`;
+      html += `<div class="date-line"><span class="date-num">${cur.getDate()}</span><span class="date-month">${cur.getMonth()+1}월</span></div>`;
+      if(hs.length){ html += `<div class="holiday-box">${hs.map(h=>`<span class="hlabel ${h.country.toLowerCase()}" title="${h.name}">${h.country}</span>`).join('')}</div>${hs.map(h=>`<div class="hname">${h.name}</div>`).join('')}`; }
+      dayTasks.slice(0,7).forEach(t=>{
+        const contLeft = dateObj(t.start)<cur; const contRight = dateObj(t.end)>cur;
+        html += `<div class="task-pill ${contLeft?'continue-left':''} ${contRight?'continue-right':''}" onclick="editTask('${t.id}')" title="${escapeHtml(t.category)}
+${escapeHtml(t.title)}
+${escapeHtml(t.start)} – ${escapeHtml(t.end)}
+${escapeHtml(t.note||'')}" style="background:${categoryColors[t.category]||'#111827'}"><i class="progress" style="width:${Number(t.progress)||0}%"></i><span>${escapeHtml(shortLabel(t,cur))}</span></div>`;
+      });
+      if(dayTasks.length>7) html += `<div class="more">+ ${dayTasks.length-7} more</div>`;
+      if(dayTravel.length){
+        const travelNames = dayTravel.map(t => `<span class="travel-name" onclick="event.stopPropagation(); showTab('travel'); editTravel('${escapeHtml(t.id)}')" title="Business Trip\n${escapeHtml(t.name || '')}\n${escapeHtml(t.start || '')} – ${escapeHtml(t.end || '')}\n${escapeHtml(t.note||'')}">${escapeHtml(t.name || '')}</span>`).join(', ');
+        html += `<div class="travel-line"><span class="travel-label">출장자:</span> ${travelNames}</div>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div></div>`;
+  }
+  calendarWrap.innerHTML = html;
+}
+function shortLabel(t,cur){
+  const isStart = fmt(cur)===t.start;
+  const prefix = isStart ? '▶ ' : '';
+  return prefix + safeText(t.category).replace('콘텐츠 ','') + ' · ' + safeText(t.title);
+}
+function download(name, text, type){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
+function downloadJSON(){ download('weekly_schedule_2026_may_aug.json', JSON.stringify({tasks,categoryColors},null,2), 'application/json'); }
+function csvEscape(v){ return '"'+String(v??'').replaceAll('"','""')+'"'; }
+function downloadCSV(){ const rows=[['Category','Title','Start','End','Progress','Note'],...tasks.map(t=>[t.category,t.title,t.start,t.end,t.progress,t.note])]; download('weekly_schedule_2026_may_aug.csv', rows.map(r=>r.map(csvEscape).join(',')).join('\n'), 'text/csv;charset=utf-8'); }
+function downloadNotionCSV(){ const rows=[['Name','Category','Start','End','Progress','Status','Memo','Color'],...tasks.map(t=>[t.title,t.category,t.start,t.end,t.progress,t.progress>=100?'Done':t.progress>0?'In progress':'Not started',t.note,categoryColors[t.category]])]; download('notion_import_weekly_schedule.csv', rows.map(r=>r.map(csvEscape).join(',')).join('\n'), 'text/csv;charset=utf-8'); }
+function importJSON(e){ alert('Google Sheets 연동 버전에서는 JSON 불러오기보다 Sheet 입력/저장을 권장합니다. 기존 JSON을 반영하려면 데이터를 불러온 뒤 각 항목을 저장하는 별도 import 기능이 필요합니다.'); }
+
+let reports = {};
+function todayInRange(){ return '2026-05-01'; }
+function showTab(tab){
+  document.getElementById('scheduleTab').classList.toggle('hidden', tab !== 'schedule');
+  document.getElementById('reportTab').classList.toggle('hidden', tab !== 'report');
+  document.getElementById('travelTab').classList.toggle('hidden', tab !== 'travel');
+  document.getElementById('scheduleTabBtn').classList.toggle('active', tab === 'schedule');
+  document.getElementById('reportTabBtn').classList.toggle('active', tab === 'report');
+  document.getElementById('travelTabBtn').classList.toggle('active', tab === 'travel');
+  if(tab === 'report') renderReportHistory();
+  if(tab === 'travel') renderTravelList();
+}
+async function loadReports(){
+  if(!document.getElementById('reportDate').value) document.getElementById('reportDate').value = todayInRange();
+  await loadReportsFromSheet();
+}
+async function loadReportsFromSheet(){
+  try{
+    const data = await apiGet('getDailyReports');
+    reports = normalizeReports(data);
+    loadReportForDate(document.getElementById('reportDate').value || todayInRange());
+    renderReportHistory();
+  }catch(err){
+    console.error(err);
+    alert('Google Sheet에서 Daily Report 데이터를 불러오지 못했습니다. Apps Script 배포 권한과 DailyReport 탭 이름을 확인해주세요.\n\n' + err.message);
+  }
+}
+function normalizeReports(rows){
+  const out = {};
+  if(!Array.isArray(rows)) return out;
+  rows.forEach(row=>{
+    const date = row.date || '';
+    if(!date) return;
+    if(!out[date]) out[date] = {date, updatedAt: row.updatedAt || '', xorbis:{}, twok:{}};
+    const company = safeText(row.company).toLowerCase();
+    const target = company.includes('2k') ? 'twok' : 'xorbis';
+    out[date][target] = {
+      today: row.todayWorkProgress || '',
+      tomorrow: row.tomorrowTodo || '',
+      issues: row.openIssues || ''
+    };
+    if(row.updatedAt) out[date].updatedAt = row.updatedAt;
+  });
+  return out;
+}
+function reportPayload(){
+  return {
+    date: reportDate.value,
+    updatedAt: new Date().toISOString(),
+    xorbis:{today:xorbisToday.value.trim(), tomorrow:xorbisTomorrow.value.trim(), issues:xorbisIssues.value.trim()},
+    twok:{today:twokToday.value.trim(), tomorrow:twokTomorrow.value.trim(), issues:twokIssues.value.trim()}
+  };
+}
+async function saveReport(){
+  const r = reportPayload();
+  if(!r.date) return alert('보고 날짜를 선택하세요.');
+  try{
+    await apiPost('saveDailyReport', {date:r.date, company:'Xorbis', todayWorkProgress:r.xorbis.today, tomorrowTodo:r.xorbis.tomorrow, openIssues:r.xorbis.issues, updatedBy:''});
+    await apiPost('saveDailyReport', {date:r.date, company:'2K', todayWorkProgress:r.twok.today, tomorrowTodo:r.twok.tomorrow, openIssues:r.twok.issues, updatedBy:''});
+    await loadReportsFromSheet();
+    alert('Daily Report가 Google Sheet에 저장되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('Daily Report 저장 실패: ' + err.message);
+  }
+}
+function loadReportForDate(date){ const r=reports[date]||{xorbis:{},twok:{}}; reportDate.value=date; xorbisToday.value=r.xorbis?.today||''; xorbisTomorrow.value=r.xorbis?.tomorrow||''; xorbisIssues.value=r.xorbis?.issues||''; twokToday.value=r.twok?.today||''; twokTomorrow.value=r.twok?.tomorrow||''; twokIssues.value=r.twok?.issues||''; }
+function clearReportForm(){ reportDate.value=todayInRange(); xorbisToday.value=''; xorbisTomorrow.value=''; xorbisIssues.value=''; twokToday.value=''; twokTomorrow.value=''; twokIssues.value=''; }
+async function deleteCurrentReport(){
+  const d = reportDate.value;
+  if(!d) return alert('삭제할 보고 날짜를 선택하세요.');
+  if(!confirm(d + ' Daily Report를 Google Sheet에서 삭제할까요?\nXorbis와 2K 기록이 모두 삭제됩니다.')) return;
+  try{
+    await apiPost('deleteDailyReport', { date:d });
+
+    await loadReportsFromSheet();
+    clearReportForm();
+    alert('Daily Report가 삭제되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('Daily Report 삭제 실패: ' + err.message + '\n\nGoogle Sheet에서 실제로 삭제되지 않았습니다. Apps Script 재배포와 deleteDailyReport 함수를 확인해주세요.');
+    await loadReportsFromSheet();
+  }
+}
+function renderReportHistory(){
+  const q=(document.getElementById('reportSearch')?.value||'').toLowerCase();
+  const items=Object.values(reports)
+    .sort((a,b)=>safeText(b.date).localeCompare(safeText(a.date)))
+    .filter(r=>JSON.stringify(r).toLowerCase().includes(q));
+
+  reportHistoryList.innerHTML = items.length ? items.map(r=>{
+    const summary=[r.xorbis?.today,r.twok?.today,r.xorbis?.issues,r.twok?.issues]
+      .filter(Boolean).join(' / ').slice(0,120);
+    const updated = r.updatedAt ? new Date(r.updatedAt).toLocaleString() : '';
+    return `
+      <div class="history-card">
+        <button type="button" onclick="loadReportForDate('${r.date}')">
+          <b>${escapeHtml(r.date)}</b>
+          <div class="history-meta">Updated: ${escapeHtml(updated)} · ${escapeHtml(summary || 'No summary')}</div>
+        </button>
+        <div class="history-detail">
+          <div class="history-columns">
+            <div class="history-mini xorbis"><b>Xorbis</b><br><strong>Today’s Work Progress</strong><br>${escapeHtml(r.xorbis?.today || '')}</div>
+            <div class="history-mini twok"><b>2K</b><br><strong>Today’s Work Progress</strong><br>${escapeHtml(r.twok?.today || '')}</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('') : '<p class="notice">저장된 Daily Report가 없습니다.</p>';
+}
+function escapeHtml(str){ return String(str).replace(/[&<>\"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+function downloadReportsJSON(){ download('daily_reports_2026_may_aug.json', JSON.stringify(reports,null,2), 'application/json'); }
+function downloadReportsCSV(){
+  const rows=[['Date','Party','Today Record','Tomorrow To List','Unresolved Issues / Others','Updated At']];
+  Object.values(reports).sort((a,b)=>safeText(a.date).localeCompare(safeText(b.date))).forEach(r=>{
+    rows.push([r.date,'Xorbis',r.xorbis?.today||'',r.xorbis?.tomorrow||'',r.xorbis?.issues||'',r.updatedAt]);
+    rows.push([r.date,'2K',r.twok?.today||'',r.twok?.tomorrow||'',r.twok?.issues||'',r.updatedAt]);
+  });
+  download('daily_reports_2026_may_aug.csv', rows.map(r=>r.map(csvEscape).join(',')).join('\n'), 'text/csv;charset=utf-8');
+}
+
+let travelItems = [];
+async function loadTravel(){
+  clearTravelForm();
+  await loadTravelFromSheet();
+}
+async function loadTravelFromSheet(){
+  try{
+    const data = await apiGet('getTravel');
+    travelItems = Array.isArray(data) ? data.filter(t=>t && t.id) : [];
+    renderTravelList();
+    renderCalendar();
+    const st=document.getElementById('travelStatus'); if(st) st.textContent = 'Loaded ' + travelItems.length + ' business trip record(s).';
+  }catch(err){
+    console.error(err);
+    const st=document.getElementById('travelStatus'); if(st) st.textContent = 'Travel 데이터를 불러오지 못했습니다. Apps Script에 getTravel 액션과 Travel 탭을 추가했는지 확인하세요.';
+  }
+}
+function travelPayload(){
+  return {
+    id: document.getElementById('travelEditId').value || crypto.randomUUID(),
+    name: travelName.value.trim(),
+    start: travelStart.value,
+    end: travelEnd.value,
+    note: travelNote.value.trim(),
+    updatedBy:''
+  };
+}
+async function saveTravel(){
+  const t = travelPayload();
+  if(!t.name) return alert('사람 이름을 입력하세요.');
+  if(!t.start || !t.end) return alert('출장 시작일과 종료일을 입력하세요.');
+  if(dateObj(t.start)>dateObj(t.end)) return alert('출장 종료일은 시작일 이후여야 합니다.');
+  if(dateObj(t.start)<rangeStart || dateObj(t.end)>rangeEnd) return alert('2026년 5월 1일부터 8월 31일 사이로 입력하세요.');
+  try{
+    await apiPost('saveTravel', t);
+    await loadTravelFromSheet();
+    clearTravelForm();
+    alert('출장 일정이 저장되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('출장 일정 저장 실패: ' + err.message + '\n\nApps Script에 saveTravel 액션과 Travel 탭이 추가되어 있는지 확인해주세요.');
+  }
+}
+function clearTravelForm(){
+  const today='2026-05-01';
+  if(document.getElementById('travelEditId')) travelEditId.value='';
+  if(document.getElementById('travelName')) travelName.value='';
+  if(document.getElementById('travelStart')) travelStart.value=today;
+  if(document.getElementById('travelEnd')) travelEnd.value=today;
+  if(document.getElementById('travelNote')) travelNote.value='';
+}
+function editTravel(id){
+  const targetId=String(id||'').trim();
+  const t=travelItems.find(x=>String(x.id).trim()===targetId);
+  if(!t) return;
+  travelEditId.value=t.id;
+  travelName.value=t.name||'';
+  travelStart.value=t.start||'2026-05-01';
+  travelEnd.value=t.end||'2026-05-01';
+  travelNote.value=t.note||'';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+async function deleteTravel(id){
+  const targetId=String(id||'').trim();
+  const t=travelItems.find(x=>String(x.id).trim()===targetId);
+  const label=t ? `${t.name} (${t.start} – ${t.end})` : targetId;
+  if(!confirm('이 출장 일정을 Google Sheet에서 삭제할까요?\n' + label)) return;
+  try{
+    await apiPost('deleteTravel', {id: targetId});
+    await loadTravelFromSheet();
+    clearTravelForm();
+    alert('출장 일정이 삭제되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('출장 일정 삭제 실패: ' + err.message + '\n\nApps Script에 deleteTravel 액션이 추가되어 있는지 확인해주세요.');
+    await loadTravelFromSheet();
+  }
+}
+function renderTravelList(){
+  const q=(document.getElementById('travelSearch')?.value||'').toLowerCase();
+  const items=travelItems.slice()
+    .sort((a,b)=>safeText(a.start).localeCompare(safeText(b.start)) || safeText(a.name).localeCompare(safeText(b.name)))
+    .filter(t=>JSON.stringify(t).toLowerCase().includes(q));
+  const el=document.getElementById('travelList');
+  if(!el) return;
+  el.innerHTML = items.length ? items.map(t=>`
+    <div class="travel-card">
+      <b>${escapeHtml(t.name || '')}</b>
+      <small class="travel-period">${escapeHtml(t.start || '')} – ${escapeHtml(t.end || '')}</small>
+      <div class="travel-note">${escapeHtml(t.note || '')}</div>
+      <div class="travel-actions"><button class="secondary" onclick="editTravel('${escapeHtml(t.id)}')">수정</button><button class="danger" onclick="deleteTravel('${escapeHtml(t.id)}')">삭제</button></div>
+    </div>`).join('') : '<p class="notice">저장된 출장 일정이 없습니다.</p>';
+}
+function downloadTravelCSV(){
+  const rows=[['Name','Start','End','Note','UpdatedBy','UpdatedAt'],...travelItems.map(t=>[t.name,t.start,t.end,t.note,t.updatedBy,t.updatedAt])];
+  download('business_trips_2026_may_aug.csv', rows.map(r=>r.map(csvEscape).join(',')).join('\n'), 'text/csv;charset=utf-8');
+}
+
+function printReport(){ window.print(); }
+document.addEventListener('change', e=>{ if(e.target && e.target.id === 'reportDate') loadReportForDate(e.target.value); });
+
+(async function init(){
+  await load();
+  await loadReports();
+  await loadTravel();
+})();
+</script>
+</body>
+</html>
