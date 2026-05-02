@@ -213,7 +213,7 @@ function barTextColor(bg){
   const r = parseInt(raw.slice(0,2),16);
   const g = parseInt(raw.slice(2,4),16);
   const b = parseInt(raw.slice(4,6),16);
-  const mix = 0.20; // 20% bar color over white
+  const mix = 0.30; // 30% bar color over white
   const rr = Math.round(255 * (1 - mix) + r * mix);
   const gg = Math.round(255 * (1 - mix) + g * mix);
   const bb = Math.round(255 * (1 - mix) + b * mix);
