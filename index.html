@@ -141,10 +141,10 @@
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbxYpj5rbXZh3p3WIZB9SRA7-uEj_3FWLc5Whx_qUC_xwcoBIw8hu_keBMpMKSUay_Vjuw/exec';
 
-const categories = ['시공','ContentsA','ContentsB','ContentsC','ContentsD','GraffitiX','HW 설치','빔프로젝터 설치','SW 설치','리뷰 및 보고'];
+const categories = ['시공','ContentsA','ContentsB','ContentsC','ContentsD','GraffitiX','HW 설치','빔프로젝터','SW 설치','리뷰 및 보고'];
 const defaultColors = {
   '시공':'#f97316', 'ContentsA':'#2563eb', 'ContentsB':'#0ea5e9', 'ContentsC':'#0f766e', 'ContentsD':'#7c3aed',
-  'GraffitiX':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터 설치':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
+  'GraffitiX':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
 };
 let categoryColors = {...defaultColors};
 const categoryNameMap = {
@@ -187,7 +187,7 @@ const sampleTasks = [
   {id:crypto.randomUUID(),category:'ContentsD',title:'Zone D Content',start:'2026-06-03',end:'2026-07-16',progress:20,note:''},
   {id:crypto.randomUUID(),category:'GraffitiX',title:'Graffiti X AI Pipeline & UI',start:'2026-05-15',end:'2026-07-25',progress:25,note:'AI drawing interaction'},
   {id:crypto.randomUUID(),category:'HW 설치',title:'Hardware Installation',start:'2026-06-17',end:'2026-07-20',progress:10,note:''},
-  {id:crypto.randomUUID(),category:'빔프로젝터 설치',title:'Projector Mounting & Alignment',start:'2026-07-01',end:'2026-08-05',progress:0,note:''},
+  {id:crypto.randomUUID(),category:'빔프로젝터',title:'Projector Mounting & Alignment',start:'2026-07-01',end:'2026-08-05',progress:0,note:''},
   {id:crypto.randomUUID(),category:'SW 설치',title:'Software / Media Server Setup',start:'2026-07-14',end:'2026-08-12',progress:0,note:''},
   {id:crypto.randomUUID(),category:'리뷰 및 보고',title:'Weekly Review & Reports',start:'2026-05-05',end:'2026-08-29',progress:0,note:'매주 리뷰/보고'}
 ];
