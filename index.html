@@ -21,7 +21,7 @@
     .task-list{margin-top:16px}.task-card{border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px;background:#fafafa}.task-card b{display:block;font-size:13px}.task-card small{display:block;color:var(--muted);margin-top:4px}.task-actions{display:flex;gap:6px;margin-top:10px}.task-actions button{padding:7px 10px;font-size:12px}
     .calendar{padding:18px;overflow:auto}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px;position:sticky;left:0;background:var(--panel);z-index:5}.calendar-wrap{min-width:980px}.week{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;margin-bottom:16px}.week-title{padding:12px 14px;background:#f8fafc;border-bottom:1px solid var(--line);font-weight:800;display:flex;justify-content:space-between;gap:12px;align-items:center}.week-title small{font-weight:500;color:var(--muted)}
     .days-header,.days-grid{display:grid;grid-template-columns:repeat(7,1fr)}.days-header div{padding:8px;text-align:center;font-size:12px;font-weight:800;background:#fbfbfb;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.days-header div:last-child{border-right:0}.day-cell{min-height:138px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px;background:#fff;position:relative}.day-cell:nth-child(7n){border-right:0}.day-cell.weekend{background:var(--weekend)}.date-line{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}.date-num{font-size:13px;font-weight:800}.date-month{font-size:10px;color:var(--muted)}.outside{opacity:.28}.holiday-box{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px}.hlabel{font-size:9px;padding:2px 4px;border-radius:5px;font-weight:800}.hlabel.kr{background:var(--kr)}.hlabel.sg{background:var(--sg)}.hname{font-size:9px;color:#475569;line-height:1.2;margin-bottom:2px}
-    .task-pill{display:block;width:100%;border-radius:8px;color:#fff;margin:3px 0;padding:4px 6px;font-size:10.5px;font-weight:800;line-height:1.15;box-shadow:0 2px 4px rgba(0,0,0,.15);cursor:pointer;position:relative;overflow:hidden}.task-pill .progress{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.28)}.task-pill span{position:relative;z-index:1}.task-pill.continue-left{border-top-left-radius:2px;border-bottom-left-radius:2px}.task-pill.continue-right{border-top-right-radius:2px;border-bottom-right-radius:2px}.travel-pill{display:block;width:100%;margin:3px 0;padding:2px 0;font-size:10.5px;font-weight:700;line-height:1.2;color:#374151;background:transparent;box-shadow:none;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.travel-pill:hover{text-decoration:underline}.travel-line{margin-top:5px;padding-top:4px;border-top:1px dashed #d1d5db;font-size:10.5px;line-height:1.25;color:#374151;white-space:normal}.travel-name{cursor:pointer}.travel-name:hover{text-decoration:underline}.travel-label{font-weight:800;color:#6b7280}.more{font-size:10px;color:var(--muted);margin-top:4px}
+    .days-grid{position:relative;--task-top:54px;--lane-h:24px;--lane-count:0;--travel-h:0px}.day-cell{min-height:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + var(--travel-h) + 6px);padding:7px 10px 4px}.holiday-box{margin-bottom:2px}.hname{line-height:1.12;margin-bottom:1px}.task-bar-layer{position:absolute;left:0;right:0;top:var(--task-top);height:calc(var(--lane-count) * var(--lane-h));pointer-events:none;z-index:2}.week-task-bar{position:absolute;height:22px;border-radius:0;color:#fff;padding:4px 8px;font-size:10.5px;font-weight:800;line-height:1.15;box-shadow:none;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;pointer-events:auto}.week-task-bar .progress{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.28)}.week-task-bar span{position:relative;z-index:1}.week-task-bar.segment-start{border-top-left-radius:8px;border-bottom-left-radius:8px}.week-task-bar.segment-end{border-top-right-radius:8px;border-bottom-right-radius:8px}.week-task-bar.segment-start.segment-end{border-radius:8px}.task-spacer{display:none}.travel-pill{display:block;width:100%;margin:3px 0;padding:2px 0;font-size:10.5px;font-weight:700;line-height:1.2;color:#374151;background:transparent;box-shadow:none;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.travel-pill:hover{text-decoration:underline}.travel-line{position:absolute;left:10px;right:10px;top:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + 2px);margin:0;padding-top:2px;border-top:1px dashed #d1d5db;font-size:10.5px;line-height:1.16;color:#374151;white-space:normal;z-index:3;max-height:24px;overflow:hidden}.travel-name{cursor:pointer}.travel-name:hover{text-decoration:underline}.travel-label{font-weight:800;color:#6b7280}.more{font-size:10px;color:var(--muted);margin-top:4px}
 
     .top-tabs{display:flex;gap:8px;padding:14px 32px 0;background:#f9faf7}.tab-btn{background:#e5e7eb;color:#111827}.tab-btn.active{background:#111827;color:#fff}.hidden{display:none!important}
     .report-app{padding:18px;max-width:1600px;margin:auto}.report-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.report-editor{padding:18px}.report-history{padding:18px;max-height:calc(100vh - 150px);overflow:auto}.report-date-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px}.report-date-row input{max-width:220px}.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.party-box{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fbfbfb}.party-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.party-name{font-size:18px;font-weight:900}.party-name.xorbis{color:#2563eb}.party-name.twok{color:#0f766e}.report-section{margin-top:12px}.report-section textarea{min-height:110px;background:#fff}.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.history-card{border:1px solid var(--line);border-radius:16px;background:#fafafa;margin-bottom:10px;overflow:hidden}.history-card button{border-radius:0;width:100%;text-align:left;background:#fff;color:#111827;padding:12px 14px}.history-card button:hover{background:#f3f4f6}.history-meta{font-size:12px;color:var(--muted);margin-top:3px}.history-detail{padding:0 14px 14px;font-size:12px;color:#374151;line-height:1.5}.history-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.history-mini{border-left:4px solid #d1d5db;padding-left:8px;white-space:pre-wrap}.history-mini.xorbis{border-color:#2563eb}.history-mini.twok{border-color:#0f766e}.search-row{display:flex;gap:8px;margin-bottom:12px}.search-row input{flex:1}.print-area-title{display:none}
@@ -141,12 +141,22 @@
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbxYpj5rbXZh3p3WIZB9SRA7-uEj_3FWLc5Whx_qUC_xwcoBIw8hu_keBMpMKSUay_Vjuw/exec';
 
-const categories = ['현장시공','콘텐츠 ZoneA','콘텐츠 ZoneB','콘텐츠 ZoneC','콘텐츠 존D','그래피티X','HW 설치','빔프로젝터 설치','SW 설치','리뷰 및 보고'];
+const categories = ['시공','ContentsA','ContentsB','ContentsC','ContentsD','GraffitiX','HW 설치','빔프로젝터 설치','SW 설치','리뷰 및 보고'];
 const defaultColors = {
-  '현장시공':'#f97316', '콘텐츠 ZoneA':'#2563eb', '콘텐츠 ZoneB':'#0ea5e9', '콘텐츠 ZoneC':'#0f766e', '콘텐츠 존D':'#7c3aed',
-  '그래피티X':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터 설치':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
+  '시공':'#f97316', 'ContentsA':'#2563eb', 'ContentsB':'#0ea5e9', 'ContentsC':'#0f766e', 'ContentsD':'#7c3aed',
+  'GraffitiX':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터 설치':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
 };
 let categoryColors = {...defaultColors};
+const categoryNameMap = {
+  '현장시공':'시공',
+  '콘텐츠 ZoneA':'ContentsA',
+  '콘텐츠 ZoneB':'ContentsB',
+  '콘텐츠 ZoneC':'ContentsC',
+  '콘텐츠 존D':'ContentsD',
+  '그래피티X':'GraffitiX'
+};
+function displayCategoryName(name){ return categoryNameMap[name] || name; }
+
 const rangeStart = new Date('2026-05-01T00:00:00');
 const rangeEnd = new Date('2026-08-31T00:00:00');
 const calendarStart = startOfWeek(rangeStart); // Sunday start
@@ -170,12 +180,12 @@ const holidays = {
 };
 let tasks = [];
 const sampleTasks = [
-  {id:crypto.randomUUID(),category:'현장시공',title:'Hoarding / Site Preparation',start:'2026-05-01',end:'2026-05-18',progress:30,note:'현장 준비 및 임시 구조물'},
-  {id:crypto.randomUUID(),category:'콘텐츠 ZoneA',title:'Zone A Content Production',start:'2026-05-06',end:'2026-06-10',progress:45,note:'Rising Sea Level'},
-  {id:crypto.randomUUID(),category:'콘텐츠 ZoneB',title:'Zone B Content Production',start:'2026-05-13',end:'2026-06-18',progress:40,note:'The Tipping Point'},
-  {id:crypto.randomUUID(),category:'콘텐츠 ZoneC',title:'Zone C Content / Hallway of Hope',start:'2026-05-20',end:'2026-07-08',progress:35,note:'메인 몰입 콘텐츠'},
-  {id:crypto.randomUUID(),category:'콘텐츠 존D',title:'Zone D Content',start:'2026-06-03',end:'2026-07-16',progress:20,note:''},
-  {id:crypto.randomUUID(),category:'그래피티X',title:'Graffiti X AI Pipeline & UI',start:'2026-05-15',end:'2026-07-25',progress:25,note:'AI drawing interaction'},
+  {id:crypto.randomUUID(),category:'시공',title:'Hoarding / Site Preparation',start:'2026-05-01',end:'2026-05-18',progress:30,note:'현장 준비 및 임시 구조물'},
+  {id:crypto.randomUUID(),category:'ContentsA',title:'Zone A Content Production',start:'2026-05-06',end:'2026-06-10',progress:45,note:'Rising Sea Level'},
+  {id:crypto.randomUUID(),category:'ContentsB',title:'Zone B Content Production',start:'2026-05-13',end:'2026-06-18',progress:40,note:'The Tipping Point'},
+  {id:crypto.randomUUID(),category:'ContentsC',title:'Zone C Content / Hallway of Hope',start:'2026-05-20',end:'2026-07-08',progress:35,note:'메인 몰입 콘텐츠'},
+  {id:crypto.randomUUID(),category:'ContentsD',title:'Zone D Content',start:'2026-06-03',end:'2026-07-16',progress:20,note:''},
+  {id:crypto.randomUUID(),category:'GraffitiX',title:'Graffiti X AI Pipeline & UI',start:'2026-05-15',end:'2026-07-25',progress:25,note:'AI drawing interaction'},
   {id:crypto.randomUUID(),category:'HW 설치',title:'Hardware Installation',start:'2026-06-17',end:'2026-07-20',progress:10,note:''},
   {id:crypto.randomUUID(),category:'빔프로젝터 설치',title:'Projector Mounting & Alignment',start:'2026-07-01',end:'2026-08-05',progress:0,note:''},
   {id:crypto.randomUUID(),category:'SW 설치',title:'Software / Media Server Setup',start:'2026-07-14',end:'2026-08-12',progress:0,note:''},
@@ -223,7 +233,7 @@ async function load(){
 async function loadScheduleFromSheet(){
   try{
     const data = await apiGet('getSchedule');
-    tasks = Array.isArray(data) ? data.filter(t => t && t.id !== '') : [];
+    tasks = Array.isArray(data) ? data.filter(t => t && t.id !== '').map(t => ({...t, category: displayCategoryName(t.category)})) : [];
     render();
   }catch(err){
     console.error(err);
@@ -284,30 +294,67 @@ function renderCalendar(){
   let html = '';
   for(let ws=new Date(calendarStart); ws<=calendarEnd; ws=addDays(ws,7)){
     const we=addDays(ws,6);
+    const weekTasks = tasks
+      .filter(t=>t.start && t.end && dateObj(t.start)<=we && dateObj(t.end)>=ws)
+      .sort((a,b)=>{
+        const catDiff = categories.indexOf(a.category) - categories.indexOf(b.category);
+        if(catDiff !== 0) return catDiff;
+        const startDiff = safeText(a.start).localeCompare(safeText(b.start));
+        if(startDiff !== 0) return startDiff;
+        return safeText(a.title).localeCompare(safeText(b.title));
+      });
+    const laneCount = weekTasks.length;
+    let maxHolidayCount = 0;
+    let maxHolidayNameLen = 0;
+    let weekHasTravel = false;
+    for(let hi=0; hi<7; hi++){
+      const cur=addDays(ws,hi); const key=fmt(cur); const hs=holidays[key]||[];
+      if(hs.length){
+        maxHolidayCount = Math.max(maxHolidayCount, hs.length);
+        maxHolidayNameLen = Math.max(maxHolidayNameLen, hs.map(h=>safeText(h.name).length).join('').length);
+      }
+      if(travelItems.some(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur)) weekHasTravel = true;
+    }
+    const taskTop = maxHolidayCount ? (maxHolidayNameLen > 34 ? 92 : 74) : 54;
+    const travelH = weekHasTravel ? 23 : 0;
+
     html += `<div class="week"><div class="week-title"><span>${fmt(ws)} – ${fmt(we)}</span><small>Sun–Sat</small></div>`;
     html += `<div class="days-header"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>`;
-    html += `<div class="days-grid">`;
+    html += `<div class="days-grid" style="--lane-count:${laneCount};--task-top:${taskTop}px;--travel-h:${travelH}px">`;
+
     for(let i=0;i<7;i++){
       const cur=addDays(ws,i); const key=fmt(cur); const inRange=cur>=rangeStart && cur<=rangeEnd; const isWeekend=cur.getDay()===0||cur.getDay()===6; const hs=holidays[key]||[];
-      const dayTasks=tasks.filter(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur).sort((a,b)=>categories.indexOf(a.category)-categories.indexOf(b.category));
       const dayTravel=travelItems.filter(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur).sort((a,b)=>safeText(a.name).localeCompare(safeText(b.name)));
       html += `<div class="day-cell ${isWeekend?'weekend':''} ${inRange?'':'outside'}">`;
       html += `<div class="date-line"><span class="date-num">${cur.getDate()}</span><span class="date-month">${cur.getMonth()+1}월</span></div>`;
       if(hs.length){ html += `<div class="holiday-box">${hs.map(h=>`<span class="hlabel ${h.country.toLowerCase()}" title="${h.name}">${h.country}</span>`).join('')}</div>${hs.map(h=>`<div class="hname">${h.name}</div>`).join('')}`; }
-      dayTasks.slice(0,7).forEach(t=>{
-        const contLeft = dateObj(t.start)<cur; const contRight = dateObj(t.end)>cur;
-        html += `<div class="task-pill ${contLeft?'continue-left':''} ${contRight?'continue-right':''}" onclick="editTask('${t.id}')" title="${escapeHtml(t.category)}
-${escapeHtml(t.title)}
-${escapeHtml(t.start)} – ${escapeHtml(t.end)}
-${escapeHtml(t.note||'')}" style="background:${categoryColors[t.category]||'#111827'}"><i class="progress" style="width:${Number(t.progress)||0}%"></i><span>${escapeHtml(shortLabel(t,cur))}</span></div>`;
-      });
-      if(dayTasks.length>7) html += `<div class="more">+ ${dayTasks.length-7} more</div>`;
+      html += `<div class="task-spacer"></div>`;
       if(dayTravel.length){
         const travelNames = dayTravel.map(t => `<span class="travel-name" onclick="event.stopPropagation(); showTab('travel'); editTravel('${escapeHtml(t.id)}')" title="Business Trip\n${escapeHtml(t.name || '')}\n${escapeHtml(t.start || '')} – ${escapeHtml(t.end || '')}\n${escapeHtml(t.note||'')}">${escapeHtml(t.name || '')}</span>`).join(', ');
         html += `<div class="travel-line"><span class="travel-label">출장자:</span> ${travelNames}</div>`;
       }
       html += `</div>`;
     }
+
+    html += `<div class="task-bar-layer">`;
+    weekTasks.forEach((t,laneIndex)=>{
+      const rawStart = dateObj(t.start);
+      const rawEnd = dateObj(t.end);
+      const segStart = rawStart > ws ? rawStart : ws;
+      const segEnd = rawEnd < we ? rawEnd : we;
+      const startIdx = Math.max(0, Math.min(6, Math.round((segStart - ws) / 86400000)));
+      const endIdx = Math.max(0, Math.min(6, Math.round((segEnd - ws) / 86400000)));
+      const span = endIdx - startIdx + 1;
+      const left = (startIdx / 7) * 100;
+      const width = (span / 7) * 100;
+      const isActualStart = fmt(segStart) === t.start;
+      const isActualEnd = fmt(segEnd) === t.end;
+      const segmentClass = `${isActualStart?'segment-start':'segment-middle'} ${isActualEnd?'segment-end':'segment-middle'}`;
+      const label = isActualStart || startIdx === 0 ? shortLabel(t,segStart) : '';
+      html += `<div class="week-task-bar ${segmentClass}" onclick="editTask('${t.id}')" title="${escapeHtml(t.category)}\n${escapeHtml(t.title)}\n${escapeHtml(t.start)} – ${escapeHtml(t.end)}\n${escapeHtml(t.note||'')}" style="left:${left}%;width:${width}%;top:${laneIndex*24}px;background:${categoryColors[t.category]||'#111827'}"><i class="progress" style="width:${Number(t.progress)||0}%"></i><span>${escapeHtml(label)}</span></div>`;
+    });
+    html += `</div>`;
+
     html += `</div></div>`;
   }
   calendarWrap.innerHTML = html;
@@ -315,7 +362,7 @@ ${escapeHtml(t.note||'')}" style="background:${categoryColors[t.category]||'#111
 function shortLabel(t,cur){
   const isStart = fmt(cur)===t.start;
   const prefix = isStart ? '▶ ' : '';
-  return prefix + safeText(t.category).replace('콘텐츠 ','') + ' · ' + safeText(t.title);
+  return prefix + displayCategoryName(safeText(t.category)) + ' · ' + safeText(t.title);
 }
 function download(name, text, type){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
 function downloadJSON(){ download('weekly_schedule_2026_may_aug.json', JSON.stringify({tasks,categoryColors},null,2), 'application/json'); }
