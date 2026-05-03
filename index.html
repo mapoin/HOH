@@ -24,7 +24,7 @@
     .days-grid{position:relative;--task-top:54px;--lane-h:24px;--lane-count:0;--travel-h:0px}.day-cell{min-height:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + var(--travel-h) + 6px);padding:7px 10px 4px}.holiday-box{margin-bottom:2px}.hname{line-height:1.12;margin-bottom:1px}.task-bar-layer{position:absolute;left:0;right:0;top:var(--task-top);height:calc(var(--lane-count) * var(--lane-h));pointer-events:none;z-index:2}.week-task-bar{position:absolute;height:22px;border-radius:0;color:#fff;padding:4px 8px;font-size:10.5px;font-weight:800;line-height:1.15;box-shadow:none;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;pointer-events:auto}.week-task-bar .progress{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.28)}.week-task-bar span{position:relative;z-index:1}.week-task-bar.segment-start{border-top-left-radius:8px;border-bottom-left-radius:8px}.week-task-bar.segment-end{border-top-right-radius:8px;border-bottom-right-radius:8px}.week-task-bar.segment-start.segment-end{border-radius:8px}.task-spacer{display:none}.travel-pill{display:block;width:100%;margin:3px 0;padding:2px 0;font-size:10.5px;font-weight:700;line-height:1.2;color:#374151;background:transparent;box-shadow:none;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.travel-pill:hover{text-decoration:underline}.travel-line{position:absolute;left:10px;right:10px;top:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + 2px);margin:0;padding-top:2px;border-top:1px dashed #d1d5db;font-size:10.5px;line-height:1.16;color:#374151;white-space:normal;z-index:3;max-height:24px;overflow:hidden}.travel-name{cursor:pointer}.travel-name:hover{text-decoration:underline}.travel-label{font-weight:800;color:#6b7280}.more{font-size:10px;color:var(--muted);margin-top:4px}
 
     .notice-banner{max-width:1600px;margin:10px auto 0;padding:0 32px;border:0;background:transparent;color:#475569;box-shadow:none;font-size:13px;line-height:1.45}
-    .notice-banner b{display:inline;font-size:13px;margin:0 6px 0 0}.notice-banner.normal,.notice-banner.important,.notice-banner.urgent{background:transparent;border-left:0;color:#475569}.notice-banner.important b{color:#92400e}.notice-banner.urgent b{color:#991b1b}.notice-banner .notice-period{display:inline;font-size:11px;color:#64748b;opacity:.75;margin-left:8px}
+    .notice-banner b{display:inline;font-size:13px;margin:0 6px 0 0}.notice-banner.normal,.notice-banner.important,.notice-banner.urgent{background:transparent;border-left:0;color:#475569}.notice-banner .notice-item{margin:2px 0;white-space:normal}.notice-banner .notice-item.important b{color:#92400e}.notice-banner .notice-item.urgent b{color:#991b1b}.notice-banner .notice-period{display:inline;font-size:11px;color:#64748b;opacity:.75;margin-left:8px}.notice-banner .notice-body{display:inline}.notice-banner .notice-separator{color:#cbd5e1;margin:0 6px}
     .admin-secret-dot{position:absolute;right:18px;top:20px;width:8px;height:8px;border-radius:999px;background:#9ca3af;opacity:.22;border:0;padding:0;cursor:pointer;box-shadow:none;z-index:60}
     .admin-secret-dot::after{content:'';position:absolute;left:-8px;top:-8px;width:24px;height:24px;border-radius:999px;background:transparent}
     .admin-secret-dot:hover{opacity:.55;background:#6b7280;transform:scale(1.15)}header{position:relative}
@@ -712,10 +712,13 @@ function renderNoticeBanner(){
     return;
   }
 
-  const n = activeNotices[0];
-  const p = String(n.priority || 'Normal').toLowerCase();
-  banner.className = 'notice-banner ' + p;
-  banner.innerHTML = `<b>${escapeHtml(n.priority || 'Notice')} · ${escapeHtml(n.title || '')}</b><div>${escapeHtml(n.body || '').replace(/\n/g,'<br>')}</div><div class="notice-period">${escapeHtml(n.start || '')} – ${escapeHtml(n.end || '')}</div>`;
+  banner.className = 'notice-banner';
+  banner.innerHTML = activeNotices.map(n => {
+    const p = String(n.priority || 'Normal').toLowerCase();
+    const body = escapeHtml(n.body || '').replace(/\n/g,'<br>');
+    const period = (n.start || n.end) ? `<span class="notice-period">${escapeHtml(n.start || '')} – ${escapeHtml(n.end || '')}</span>` : '';
+    return `<div class="notice-item ${p}"><b>${escapeHtml(n.priority || 'Notice')} · ${escapeHtml(n.title || '')}</b><span class="notice-separator">—</span><span class="notice-body">${body}</span>${period}</div>`;
+  }).join('');
 }
 
 function noticePayload(){
