@@ -21,7 +21,10 @@
     .task-list{margin-top:16px}.task-card{border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px;background:#fafafa}.task-card b{display:block;font-size:13px}.task-card small{display:block;color:var(--muted);margin-top:4px}.task-actions{display:flex;gap:6px;margin-top:10px}.task-actions button{padding:7px 10px;font-size:12px}
     .calendar{padding:18px;overflow:auto}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px;position:sticky;left:0;background:var(--panel);z-index:5}.calendar-wrap{min-width:980px}.week{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;margin-bottom:16px}.week-title{padding:12px 14px;background:#f8fafc;border-bottom:1px solid var(--line);font-weight:800;display:flex;justify-content:space-between;gap:12px;align-items:center}.week-title small{font-weight:500;color:var(--muted)}
     .days-header,.days-grid{display:grid;grid-template-columns:repeat(7,1fr)}.days-header div{padding:8px;text-align:center;font-size:12px;font-weight:800;background:#fbfbfb;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.days-header div:last-child{border-right:0}.day-cell{min-height:138px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px;background:#fff;position:relative}.day-cell:nth-child(7n){border-right:0}.day-cell.weekend{background:var(--weekend)}.date-line{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}.date-num{font-size:13px;font-weight:800}.date-month{font-size:10px;color:var(--muted)}.outside{opacity:.28}.holiday-box{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px}.hlabel{font-size:9px;padding:2px 4px;border-radius:5px;font-weight:800}.hlabel.kr{background:var(--kr)}.hlabel.sg{background:var(--sg)}.hname{font-size:9px;color:#475569;line-height:1.2;margin-bottom:2px}
-    .days-grid{position:relative;--task-top:54px;--lane-h:24px;--lane-count:0;--travel-h:0px}.day-cell{min-height:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + var(--travel-h) + 4px);padding:7px 10px 4px}.holiday-box{margin-bottom:2px}.hname{line-height:1.12;margin-bottom:1px}.task-bar-layer{position:absolute;left:0;right:0;top:var(--task-top);height:calc(var(--lane-count) * var(--lane-h));pointer-events:none;z-index:2}.week-task-bar{position:absolute;height:22px;border-radius:0;color:#f3f4f6;padding:4px 8px;font-size:10.5px;font-weight:800;line-height:1.15;box-shadow:none;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;pointer-events:auto}.week-task-bar .progress{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.28)}.week-task-bar span{position:relative;z-index:1}.week-task-bar.segment-start{border-top-left-radius:8px;border-bottom-left-radius:8px}.week-task-bar.segment-end{border-top-right-radius:8px;border-bottom-right-radius:8px}.week-task-bar.segment-start.segment-end{border-radius:8px}.task-spacer{display:none}.travel-pill{display:block;width:100%;margin:3px 0;padding:2px 0;font-size:10.5px;font-weight:700;line-height:1.2;color:#374151;background:transparent;box-shadow:none;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.travel-pill:hover{text-decoration:underline}.travel-line{position:absolute;left:10px;right:10px;top:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + 2px);margin:0;padding-top:3px;border-top:1px dashed #d1d5db;font-size:10.5px;line-height:1.25;color:#374151;white-space:normal;z-index:3;overflow:visible}.travel-name{cursor:pointer}.travel-name:hover{text-decoration:underline}.travel-label{font-weight:800;color:#6b7280}.more{font-size:10px;color:var(--muted);margin-top:4px}
+    .days-grid{position:relative;--task-top:54px;--lane-h:24px;--lane-count:0;--travel-h:0px}.day-cell{min-height:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + var(--travel-h) + 6px);padding:7px 10px 4px}.holiday-box{margin-bottom:2px}.hname{line-height:1.12;margin-bottom:1px}.task-bar-layer{position:absolute;left:0;right:0;top:var(--task-top);height:calc(var(--lane-count) * var(--lane-h));pointer-events:none;z-index:2}.week-task-bar{position:absolute;height:22px;border-radius:0;color:#fff;padding:4px 8px;font-size:10.5px;font-weight:800;line-height:1.15;box-shadow:none;cursor:pointer;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;pointer-events:auto}.week-task-bar .progress{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.28)}.week-task-bar span{position:relative;z-index:1}.week-task-bar.segment-start{border-top-left-radius:8px;border-bottom-left-radius:8px}.week-task-bar.segment-end{border-top-right-radius:8px;border-bottom-right-radius:8px}.week-task-bar.segment-start.segment-end{border-radius:8px}.task-spacer{display:none}.travel-pill{display:block;width:100%;margin:3px 0;padding:2px 0;font-size:10.5px;font-weight:700;line-height:1.2;color:#374151;background:transparent;box-shadow:none;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.travel-pill:hover{text-decoration:underline}.travel-line{position:absolute;left:10px;right:10px;top:calc(var(--task-top) + (var(--lane-count) * var(--lane-h)) + 2px);margin:0;padding-top:2px;border-top:1px dashed #d1d5db;font-size:10.5px;line-height:1.16;color:#374151;white-space:normal;z-index:3;max-height:24px;overflow:hidden}.travel-name{cursor:pointer}.travel-name:hover{text-decoration:underline}.travel-label{font-weight:800;color:#6b7280}.more{font-size:10px;color:var(--muted);margin-top:4px}
+
+    .notice-banner{max-width:1600px;margin:14px auto 0;padding:14px 18px;border-radius:16px;border:1px solid var(--line);background:#f8fafc;color:#111827;box-shadow:var(--shadow);font-size:14px;line-height:1.55}
+    .notice-banner b{display:block;font-size:15px;margin-bottom:4px}.notice-banner.normal{background:#f8fafc;border-left:6px solid #64748b}.notice-banner.important{background:#fffbeb;border-left:6px solid #f59e0b;color:#78350f}.notice-banner.urgent{background:#fef2f2;border-left:6px solid #ef4444;color:#7f1d1d}.notice-banner .notice-period{font-size:11px;color:inherit;opacity:.75;margin-top:4px}
 
     .top-tabs{display:flex;gap:8px;padding:14px 32px 0;background:#f9faf7}.tab-btn{background:#e5e7eb;color:#111827}.tab-btn.active{background:#111827;color:#fff}.hidden{display:none!important}
     .report-app{padding:18px;max-width:1600px;margin:auto}.report-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.report-editor{padding:18px}.report-history{padding:18px;max-height:calc(100vh - 150px);overflow:auto}.report-date-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px}.report-date-row input{max-width:220px}.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.party-box{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fbfbfb}.party-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.party-name{font-size:18px;font-weight:900}.party-name.xorbis{color:#2563eb}.party-name.twok{color:#0f766e}.report-section{margin-top:12px}.report-section textarea{min-height:110px;background:#fff}.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.history-card{border:1px solid var(--line);border-radius:16px;background:#fafafa;margin-bottom:10px;overflow:hidden}.history-card button{border-radius:0;width:100%;text-align:left;background:#fff;color:#111827;padding:12px 14px}.history-card button:hover{background:#f3f4f6}.history-meta{font-size:12px;color:var(--muted);margin-top:3px}.history-detail{padding:0 14px 14px;font-size:12px;color:#374151;line-height:1.5}.history-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.history-mini{border-left:4px solid #d1d5db;padding-left:8px;white-space:pre-wrap}.history-mini.xorbis{border-color:#2563eb}.history-mini.twok{border-color:#0f766e}.search-row{display:flex;gap:8px;margin-bottom:12px}.search-row input{flex:1}.print-area-title{display:none}
@@ -42,7 +45,8 @@
     This document is intended only for authorized Hallway of Hope project stakeholders. External sharing, unauthorized copying, and redistribution are prohibited.
   </div>
 </header>
-<nav class="top-tabs"><button id="scheduleTabBtn" class="tab-btn active" onclick="showTab('schedule')">Schedule</button><button id="reportTabBtn" class="tab-btn" onclick="showTab('report')">Daily Report</button><button id="travelTabBtn" class="tab-btn" onclick="showTab('travel')">Business Trip</button></nav>
+<div id="noticeBanner" class="notice-banner hidden"></div>
+<nav class="top-tabs"><button id="scheduleTabBtn" class="tab-btn active" onclick="showTab('schedule')">Schedule</button><button id="reportTabBtn" class="tab-btn" onclick="showTab('report')">Daily Report</button><button id="travelTabBtn" class="tab-btn" onclick="showTab('travel')">Business Trip</button><button id="noticeTabBtn" class="tab-btn" onclick="showAdminNoticeTab()">Admin Notice</button></nav>
 <main class="app" id="scheduleTab">
   <aside class="panel side">
     <h2>일정 추가 / 수정</h2>
@@ -138,13 +142,49 @@
   </div>
 </section>
 
+
+
+<section class="travel-app hidden" id="noticeTab">
+  <div class="travel-layout">
+    <section class="panel travel-editor">
+      <h2>Admin Notice · 관리자 공지</h2>
+      <input type="hidden" id="noticeEditId" />
+      <label>Admin Code</label>
+      <input id="noticeAdminKey" type="password" placeholder="관리자 코드 입력" />
+      <label>공지 제목 / Title</label>
+      <input id="noticeTitle" placeholder="예: Night Work Notice" />
+      <label>공지 내용 / Body</label>
+      <textarea id="noticeBody" placeholder="공지 내용을 입력하세요"></textarea>
+      <label>중요도 / Priority</label>
+      <select id="noticePriority">
+        <option value="Normal">Normal</option>
+        <option value="Important">Important</option>
+        <option value="Urgent">Urgent</option>
+      </select>
+      <div class="row">
+        <div><label>표시 시작일 / Start</label><input id="noticeStart" type="date" min="2026-05-01" max="2026-08-31" /></div>
+        <div><label>표시 종료일 / End</label><input id="noticeEnd" type="date" min="2026-05-01" max="2026-08-31" /></div>
+      </div>
+      <label><input id="noticeActive" type="checkbox" checked style="width:auto;margin-right:6px;"> Active</label>
+      <div class="btns"><button onclick="saveNotice()">공지 저장</button><button class="secondary" onclick="clearNoticeForm()">새 공지</button></div>
+      <p class="notice">관리자 코드가 맞아야 공지 저장 / 삭제가 가능합니다.</p>
+    </section>
+    <section class="panel travel-list-panel">
+      <div class="toolbar"><h2>Notice History</h2><div class="holiday-note">공지 목록</div></div>
+      <div class="btns"><button class="secondary" onclick="loadNoticesFromSheet()">새로고침</button></div>
+      <p class="travel-status" id="noticeStatus"></p>
+      <div id="noticeList"></div>
+    </section>
+  </div>
+</section>
+
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbxYpj5rbXZh3p3WIZB9SRA7-uEj_3FWLc5Whx_qUC_xwcoBIw8hu_keBMpMKSUay_Vjuw/exec';
 
-const categories = ['시공','ContentsA','ContentsB','ContentsC','ContentsD','GraffitiX','HW 설치','빔프로젝터','SW 설치','리뷰 및 보고'];
+const categories = ['시공','ContentsA','ContentsB','ContentsC','ContentsD','GraffitiX','HW 설치','빔프로젝터 설치','SW 설치','리뷰 및 보고'];
 const defaultColors = {
   '시공':'#f97316', 'ContentsA':'#2563eb', 'ContentsB':'#0ea5e9', 'ContentsC':'#0f766e', 'ContentsD':'#7c3aed',
-  'GraffitiX':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
+  'GraffitiX':'#be123c', 'HW 설치':'#ca8a04', '빔프로젝터 설치':'#9333ea', 'SW 설치':'#059669', '리뷰 및 보고':'#111827'
 };
 let categoryColors = {...defaultColors};
 const categoryNameMap = {
@@ -187,7 +227,7 @@ const sampleTasks = [
   {id:crypto.randomUUID(),category:'ContentsD',title:'Zone D Content',start:'2026-06-03',end:'2026-07-16',progress:20,note:''},
   {id:crypto.randomUUID(),category:'GraffitiX',title:'Graffiti X AI Pipeline & UI',start:'2026-05-15',end:'2026-07-25',progress:25,note:'AI drawing interaction'},
   {id:crypto.randomUUID(),category:'HW 설치',title:'Hardware Installation',start:'2026-06-17',end:'2026-07-20',progress:10,note:''},
-  {id:crypto.randomUUID(),category:'빔프로젝터',title:'Projector Mounting & Alignment',start:'2026-07-01',end:'2026-08-05',progress:0,note:''},
+  {id:crypto.randomUUID(),category:'빔프로젝터 설치',title:'Projector Mounting & Alignment',start:'2026-07-01',end:'2026-08-05',progress:0,note:''},
   {id:crypto.randomUUID(),category:'SW 설치',title:'Software / Media Server Setup',start:'2026-07-14',end:'2026-08-12',progress:0,note:''},
   {id:crypto.randomUUID(),category:'리뷰 및 보고',title:'Weekly Review & Reports',start:'2026-05-05',end:'2026-08-29',progress:0,note:'매주 리뷰/보고'}
 ];
@@ -203,22 +243,6 @@ function addDays(d,n){const x=new Date(d); x.setDate(x.getDate()+n); return x}
 function startOfWeek(d){const x=new Date(d); x.setDate(x.getDate()-x.getDay()); return new Date(x.getFullYear(),x.getMonth(),x.getDate())}
 function endOfWeek(d){const x=startOfWeek(d); x.setDate(x.getDate()+6); return x}
 function safeText(value){ return value == null ? '' : String(value); }
-function barTextColor(bg){
-  const fallback = '#f3f4f6';
-  if(!bg) return fallback;
-  const hex = String(bg).trim();
-  const match = hex.match(/^#?([0-9a-fA-F]{6})$/);
-  if(!match) return fallback;
-  const raw = match[1];
-  const r = parseInt(raw.slice(0,2),16);
-  const g = parseInt(raw.slice(2,4),16);
-  const b = parseInt(raw.slice(4,6),16);
-  const mix = 0.30; // 30% bar color over white
-  const rr = Math.round(255 * (1 - mix) + r * mix);
-  const gg = Math.round(255 * (1 - mix) + g * mix);
-  const bb = Math.round(255 * (1 - mix) + b * mix);
-  return '#' + [rr,gg,bb].map(v => v.toString(16).padStart(2,'0')).join('');
-}
 
 async function apiGet(action){
   const res = await fetch(API_URL + '?action=' + encodeURIComponent(action) + '&_=' + Date.now(), { method:'GET', cache:'no-store' });
@@ -332,17 +356,7 @@ function renderCalendar(){
       if(travelItems.some(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur)) weekHasTravel = true;
     }
     const taskTop = maxHolidayCount ? (maxHolidayNameLen > 34 ? 92 : 74) : 54;
-    let maxTravelLines = 0;
-    for(let ti=0; ti<7; ti++){
-      const cur=addDays(ws,ti);
-      const dayTravel=travelItems.filter(t=>t.start && t.end && dateObj(t.start)<=cur && dateObj(t.end)>=cur).sort((a,b)=>safeText(a.name).localeCompare(safeText(b.name)));
-      if(dayTravel.length){
-        const travelText = '출장자: ' + dayTravel.map(t=>safeText(t.name || '')).join(', ');
-        const estimatedLines = Math.max(1, Math.ceil(travelText.length / 18));
-        maxTravelLines = Math.max(maxTravelLines, estimatedLines);
-      }
-    }
-    const travelH = weekHasTravel ? (maxTravelLines * 17 + 8) : 0;
+    const travelH = weekHasTravel ? 23 : 0;
 
     html += `<div class="week"><div class="week-title"><span>${fmt(ws)} – ${fmt(we)}</span><small>Sun–Sat</small></div>`;
     html += `<div class="days-header"><div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div></div>`;
@@ -377,7 +391,7 @@ function renderCalendar(){
       const isActualEnd = fmt(segEnd) === t.end;
       const segmentClass = `${isActualStart?'segment-start':'segment-middle'} ${isActualEnd?'segment-end':'segment-middle'}`;
       const label = isActualStart || startIdx === 0 ? shortLabel(t,segStart) : '';
-      html += `<div class="week-task-bar ${segmentClass}" onclick="editTask('${t.id}')" title="${escapeHtml(t.category)}\n${escapeHtml(t.title)}\n${escapeHtml(t.start)} – ${escapeHtml(t.end)}\n${escapeHtml(t.note||'')}" style="left:${left}%;width:${width}%;top:${laneIndex*24}px;background:${categoryColors[t.category]||'#111827'};color:${barTextColor(categoryColors[t.category]||'#111827')}"><i class="progress" style="width:${Number(t.progress)||0}%"></i><span>${escapeHtml(label)}</span></div>`;
+      html += `<div class="week-task-bar ${segmentClass}" onclick="editTask('${t.id}')" title="${escapeHtml(t.category)}\n${escapeHtml(t.title)}\n${escapeHtml(t.start)} – ${escapeHtml(t.end)}\n${escapeHtml(t.note||'')}" style="left:${left}%;width:${width}%;top:${laneIndex*24}px;background:${categoryColors[t.category]||'#111827'}"><i class="progress" style="width:${Number(t.progress)||0}%"></i><span>${escapeHtml(label)}</span></div>`;
     });
     html += `</div>`;
 
@@ -403,11 +417,23 @@ function showTab(tab){
   document.getElementById('scheduleTab').classList.toggle('hidden', tab !== 'schedule');
   document.getElementById('reportTab').classList.toggle('hidden', tab !== 'report');
   document.getElementById('travelTab').classList.toggle('hidden', tab !== 'travel');
+  document.getElementById('noticeTab').classList.toggle('hidden', tab !== 'notice');
   document.getElementById('scheduleTabBtn').classList.toggle('active', tab === 'schedule');
   document.getElementById('reportTabBtn').classList.toggle('active', tab === 'report');
   document.getElementById('travelTabBtn').classList.toggle('active', tab === 'travel');
+  document.getElementById('noticeTabBtn').classList.toggle('active', tab === 'notice');
   if(tab === 'report') renderReportHistory();
   if(tab === 'travel') renderTravelList();
+  if(tab === 'notice') renderNoticeList();
+}
+function showAdminNoticeTab(){
+  const code = prompt('Admin Code를 입력하세요.');
+  if(code !== 'HOH-ADMIN-2026'){
+    alert('관리자 코드가 올바르지 않습니다.');
+    return;
+  }
+  document.getElementById('noticeAdminKey').value = code;
+  showTab('notice');
 }
 async function loadReports(){
   if(!document.getElementById('reportDate').value) document.getElementById('reportDate').value = todayInRange();
@@ -615,6 +641,132 @@ function downloadTravelCSV(){
   download('business_trips_2026_may_aug.csv', rows.map(r=>r.map(csvEscape).join(',')).join('\n'), 'text/csv;charset=utf-8');
 }
 
+
+let notices = [];
+
+async function loadNoticesFromSheet(){
+  try{
+    const data = await apiGet('getNotices');
+    notices = Array.isArray(data) ? data.filter(n => n && n.id) : [];
+    renderNoticeBanner();
+    renderNoticeList();
+    const st=document.getElementById('noticeStatus'); if(st) st.textContent = 'Loaded ' + notices.length + ' notice record(s).';
+  }catch(err){
+    console.error(err);
+    renderNoticeBanner();
+    const st=document.getElementById('noticeStatus'); if(st) st.textContent = 'Notice 데이터를 불러오지 못했습니다. Apps Script에 getNotices 액션과 Notice 탭을 추가했는지 확인하세요.';
+  }
+}
+
+function priorityWeight(priority){
+  if(priority === 'Urgent') return 3;
+  if(priority === 'Important') return 2;
+  return 1;
+}
+
+function renderNoticeBanner(){
+  const banner = document.getElementById('noticeBanner');
+  if(!banner) return;
+  const today = fmt(new Date());
+  const activeNotices = notices
+    .filter(n => n.active)
+    .filter(n => (!n.start || n.start <= today) && (!n.end || n.end >= today))
+    .sort((a,b) => priorityWeight(b.priority) - priorityWeight(a.priority) || safeText(b.updatedAt).localeCompare(safeText(a.updatedAt)));
+
+  if(!activeNotices.length){
+    banner.className = 'notice-banner hidden';
+    banner.innerHTML = '';
+    return;
+  }
+
+  const n = activeNotices[0];
+  const p = String(n.priority || 'Normal').toLowerCase();
+  banner.className = 'notice-banner ' + p;
+  banner.innerHTML = `<b>${escapeHtml(n.priority || 'Notice')} · ${escapeHtml(n.title || '')}</b><div>${escapeHtml(n.body || '').replace(/\n/g,'<br>')}</div><div class="notice-period">${escapeHtml(n.start || '')} – ${escapeHtml(n.end || '')}</div>`;
+}
+
+function noticePayload(){
+  return {
+    id: noticeEditId.value || crypto.randomUUID(),
+    title: noticeTitle.value.trim(),
+    body: noticeBody.value.trim(),
+    priority: noticePriority.value,
+    start: noticeStart.value,
+    end: noticeEnd.value,
+    active: noticeActive.checked,
+    adminKey: noticeAdminKey.value.trim(),
+    updatedBy: 'Admin'
+  };
+}
+
+async function saveNotice(){
+  const n = noticePayload();
+  if(!n.adminKey) return alert('Admin Code를 입력하세요.');
+  if(!n.title) return alert('공지 제목을 입력하세요.');
+  if(n.start && n.end && dateObj(n.start)>dateObj(n.end)) return alert('공지 종료일은 시작일 이후여야 합니다.');
+  try{
+    await apiPost('saveNotice', n);
+    await loadNoticesFromSheet();
+    clearNoticeForm(false);
+    alert('공지사항이 저장되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('공지 저장 실패: ' + err.message + '\n\nApps Script에 saveNotice 액션과 Notice 탭이 추가되어 있는지 확인해주세요.');
+  }
+}
+
+function clearNoticeForm(clearKey=true){
+  if(document.getElementById('noticeEditId')) noticeEditId.value='';
+  if(document.getElementById('noticeTitle')) noticeTitle.value='';
+  if(document.getElementById('noticeBody')) noticeBody.value='';
+  if(document.getElementById('noticePriority')) noticePriority.value='Normal';
+  if(document.getElementById('noticeStart')) noticeStart.value='2026-05-01';
+  if(document.getElementById('noticeEnd')) noticeEnd.value='2026-08-31';
+  if(document.getElementById('noticeActive')) noticeActive.checked=true;
+  if(clearKey && document.getElementById('noticeAdminKey')) noticeAdminKey.value='';
+}
+
+function editNotice(id){
+  const n = notices.find(x => String(x.id).trim() === String(id).trim());
+  if(!n) return;
+  noticeEditId.value = n.id;
+  noticeTitle.value = n.title || '';
+  noticeBody.value = n.body || '';
+  noticePriority.value = n.priority || 'Normal';
+  noticeStart.value = n.start || '2026-05-01';
+  noticeEnd.value = n.end || '2026-08-31';
+  noticeActive.checked = !!n.active;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+async function deleteNotice(id){
+  const adminKey = noticeAdminKey.value.trim();
+  if(!adminKey) return alert('Admin Code를 입력하세요.');
+  if(!confirm('이 공지를 삭제할까요?')) return;
+  try{
+    await apiPost('deleteNotice', {id, adminKey});
+    await loadNoticesFromSheet();
+    clearNoticeForm(false);
+    alert('공지사항이 삭제되었습니다.');
+  }catch(err){
+    console.error(err);
+    alert('공지 삭제 실패: ' + err.message + '\n\nApps Script에 deleteNotice 액션이 추가되어 있는지 확인해주세요.');
+  }
+}
+
+function renderNoticeList(){
+  const el = document.getElementById('noticeList');
+  if(!el) return;
+  const items = notices.slice().sort((a,b)=>safeText(b.updatedAt).localeCompare(safeText(a.updatedAt)));
+  el.innerHTML = items.length ? items.map(n => `
+    <div class="travel-card">
+      <b>${escapeHtml(n.title || '')}</b>
+      <small>${escapeHtml(n.priority || 'Normal')} · ${escapeHtml(n.start || '')} – ${escapeHtml(n.end || '')} · Active: ${n.active ? 'TRUE' : 'FALSE'}</small>
+      <div class="travel-note">${escapeHtml(n.body || '')}</div>
+      <div class="travel-actions"><button class="secondary" onclick="editNotice('${escapeHtml(n.id)}')">수정</button><button class="danger" onclick="deleteNotice('${escapeHtml(n.id)}')">삭제</button></div>
+    </div>`).join('') : '<p class="notice">등록된 공지사항이 없습니다.</p>';
+}
+
 function printReport(){ window.print(); }
 document.addEventListener('change', e=>{ if(e.target && e.target.id === 'reportDate') loadReportForDate(e.target.value); });
 
@@ -622,6 +774,7 @@ document.addEventListener('change', e=>{ if(e.target && e.target.id === 'reportD
   await load();
   await loadReports();
   await loadTravel();
+  await loadNoticesFromSheet();
 })();
 </script>
 </body>
