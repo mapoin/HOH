@@ -25,6 +25,7 @@
 
     .notice-banner{max-width:1600px;margin:14px auto 0;padding:14px 18px;border-radius:16px;border:1px solid var(--line);background:#f8fafc;color:#111827;box-shadow:var(--shadow);font-size:14px;line-height:1.55}
     .notice-banner b{display:block;font-size:15px;margin-bottom:4px}.notice-banner.normal{background:#f8fafc;border-left:6px solid #64748b}.notice-banner.important{background:#fffbeb;border-left:6px solid #f59e0b;color:#78350f}.notice-banner.urgent{background:#fef2f2;border-left:6px solid #ef4444;color:#7f1d1d}.notice-banner .notice-period{font-size:11px;color:inherit;opacity:.75;margin-top:4px}
+    .admin-secret-dot{position:absolute;right:18px;bottom:8px;width:7px;height:7px;border-radius:999px;background:#d1d5db;opacity:.45;border:0;padding:0;cursor:pointer;box-shadow:none}.admin-secret-dot:hover{opacity:.9;background:#6b7280}header{position:relative}
 
     .top-tabs{display:flex;gap:8px;padding:14px 32px 0;background:#f9faf7}.tab-btn{background:#e5e7eb;color:#111827}.tab-btn.active{background:#111827;color:#fff}.hidden{display:none!important}
     .report-app{padding:18px;max-width:1600px;margin:auto}.report-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.report-editor{padding:18px}.report-history{padding:18px;max-height:calc(100vh - 150px);overflow:auto}.report-date-row{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px}.report-date-row input{max-width:220px}.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.party-box{border:1px solid var(--line);border-radius:18px;padding:14px;background:#fbfbfb}.party-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.party-name{font-size:18px;font-weight:900}.party-name.xorbis{color:#2563eb}.party-name.twok{color:#0f766e}.report-section{margin-top:12px}.report-section textarea{min-height:110px;background:#fff}.report-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.history-card{border:1px solid var(--line);border-radius:16px;background:#fafafa;margin-bottom:10px;overflow:hidden}.history-card button{border-radius:0;width:100%;text-align:left;background:#fff;color:#111827;padding:12px 14px}.history-card button:hover{background:#f3f4f6}.history-meta{font-size:12px;color:var(--muted);margin-top:3px}.history-detail{padding:0 14px 14px;font-size:12px;color:#374151;line-height:1.5}.history-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.history-mini{border-left:4px solid #d1d5db;padding-left:8px;white-space:pre-wrap}.history-mini.xorbis{border-color:#2563eb}.history-mini.twok{border-color:#0f766e}.search-row{display:flex;gap:8px;margin-bottom:12px}.search-row input{flex:1}.print-area-title{display:none}
@@ -46,7 +47,8 @@
   </div>
 </header>
 <div id="noticeBanner" class="notice-banner hidden"></div>
-<nav class="top-tabs"><button id="scheduleTabBtn" class="tab-btn active" onclick="showTab('schedule')">Schedule</button><button id="reportTabBtn" class="tab-btn" onclick="showTab('report')">Daily Report</button><button id="travelTabBtn" class="tab-btn" onclick="showTab('travel')">Business Trip</button><button id="noticeTabBtn" class="tab-btn" onclick="showAdminNoticeTab()">Admin Notice</button></nav>
+<button class="admin-secret-dot" onclick="showAdminNoticeTab()" title=""></button>
+<nav class="top-tabs"><button id="scheduleTabBtn" class="tab-btn active" onclick="showTab('schedule')">Schedule</button><button id="reportTabBtn" class="tab-btn" onclick="showTab('report')">Daily Report</button><button id="travelTabBtn" class="tab-btn" onclick="showTab('travel')">Business Trip</button></nav>
 <main class="app" id="scheduleTab">
   <aside class="panel side">
     <h2>일정 추가 / 수정</h2>
@@ -167,7 +169,7 @@
       </div>
       <label><input id="noticeActive" type="checkbox" checked style="width:auto;margin-right:6px;"> Active</label>
       <div class="btns"><button onclick="saveNotice()">공지 저장</button><button class="secondary" onclick="clearNoticeForm()">새 공지</button></div>
-      <p class="notice">관리자 코드가 맞아야 공지 저장 / 삭제가 가능합니다.</p>
+      <p class="notice">관리자 전용 숨은 기능입니다. 관리자 코드가 맞아야 공지 저장 / 삭제가 가능합니다.</p>
     </section>
     <section class="panel travel-list-panel">
       <div class="toolbar"><h2>Notice History</h2><div class="holiday-note">공지 목록</div></div>
@@ -421,14 +423,13 @@ function showTab(tab){
   document.getElementById('scheduleTabBtn').classList.toggle('active', tab === 'schedule');
   document.getElementById('reportTabBtn').classList.toggle('active', tab === 'report');
   document.getElementById('travelTabBtn').classList.toggle('active', tab === 'travel');
-  document.getElementById('noticeTabBtn').classList.toggle('active', tab === 'notice');
   if(tab === 'report') renderReportHistory();
   if(tab === 'travel') renderTravelList();
   if(tab === 'notice') renderNoticeList();
 }
 function showAdminNoticeTab(){
   const code = prompt('Admin Code를 입력하세요.');
-  if(code !== 'HOH-ADMIN-2026'){
+  if(code !== 'xo0318'){
     alert('관리자 코드가 올바르지 않습니다.');
     return;
   }
@@ -455,9 +456,11 @@ function normalizeReports(rows){
   if(!Array.isArray(rows)) return out;
   rows.forEach(row=>{
     const date = row.date || '';
+    const rawCompany = safeText(row.company);
+    if(rawCompany.toUpperCase().startsWith('NOTICE_')) return;
     if(!date) return;
     if(!out[date]) out[date] = {date, updatedAt: row.updatedAt || '', xorbis:{}, twok:{}};
-    const company = safeText(row.company).toLowerCase();
+    const company = rawCompany.toLowerCase();
     const target = company.includes('2k') ? 'twok' : 'xorbis';
     out[date][target] = {
       today: row.todayWorkProgress || '',
@@ -644,17 +647,45 @@ function downloadTravelCSV(){
 
 let notices = [];
 
+function noticeCompany(id){
+  return 'NOTICE_' + String(id || '').trim();
+}
+
+function parseNoticeMeta(value){
+  try{
+    return JSON.parse(value || '{}');
+  }catch(err){
+    return {};
+  }
+}
+
 async function loadNoticesFromSheet(){
   try{
-    const data = await apiGet('getNotices');
-    notices = Array.isArray(data) ? data.filter(n => n && n.id) : [];
+    const data = await apiGet('getDailyReports');
+    notices = Array.isArray(data) ? data
+      .filter(row => safeText(row.company).toUpperCase().startsWith('NOTICE_'))
+      .map(row => {
+        const meta = parseNoticeMeta(row.openIssues);
+        const idFromCompany = safeText(row.company).replace(/^NOTICE_/i,'');
+        return {
+          id: meta.id || idFromCompany,
+          title: row.todayWorkProgress || '',
+          body: row.tomorrowTodo || '',
+          priority: meta.priority || 'Normal',
+          start: row.date || '',
+          end: meta.end || '',
+          active: meta.active === true || String(meta.active).toUpperCase() === 'TRUE',
+          updatedBy: row.updatedBy || 'Admin',
+          updatedAt: row.updatedAt || ''
+        };
+      }) : [];
     renderNoticeBanner();
     renderNoticeList();
     const st=document.getElementById('noticeStatus'); if(st) st.textContent = 'Loaded ' + notices.length + ' notice record(s).';
   }catch(err){
     console.error(err);
     renderNoticeBanner();
-    const st=document.getElementById('noticeStatus'); if(st) st.textContent = 'Notice 데이터를 불러오지 못했습니다. Apps Script에 getNotices 액션과 Notice 탭을 추가했는지 확인하세요.';
+    const st=document.getElementById('noticeStatus'); if(st) st.textContent = 'Notice 데이터를 불러오지 못했습니다. DailyReport API 연결을 확인하세요.';
   }
 }
 
@@ -691,8 +722,8 @@ function noticePayload(){
     title: noticeTitle.value.trim(),
     body: noticeBody.value.trim(),
     priority: noticePriority.value,
-    start: noticeStart.value,
-    end: noticeEnd.value,
+    start: noticeStart.value || '2026-05-01',
+    end: noticeEnd.value || '2026-08-31',
     active: noticeActive.checked,
     adminKey: noticeAdminKey.value.trim(),
     updatedBy: 'Admin'
@@ -701,17 +732,28 @@ function noticePayload(){
 
 async function saveNotice(){
   const n = noticePayload();
-  if(!n.adminKey) return alert('Admin Code를 입력하세요.');
+  if(n.adminKey !== 'xo0318') return alert('Admin Code가 올바르지 않습니다.');
   if(!n.title) return alert('공지 제목을 입력하세요.');
   if(n.start && n.end && dateObj(n.start)>dateObj(n.end)) return alert('공지 종료일은 시작일 이후여야 합니다.');
   try{
-    await apiPost('saveNotice', n);
+    const old = notices.find(x => String(x.id).trim() === String(n.id).trim());
+    if(old && old.start && old.start !== n.start){
+      try{ await apiPost('deleteDailyReport', { date: old.start, company: noticeCompany(n.id) }); }catch(e){}
+    }
+    await apiPost('saveDailyReport', {
+      date: n.start,
+      company: noticeCompany(n.id),
+      todayWorkProgress: n.title,
+      tomorrowTodo: n.body,
+      openIssues: JSON.stringify({id:n.id, priority:n.priority, end:n.end, active:n.active}),
+      updatedBy: 'Admin'
+    });
     await loadNoticesFromSheet();
     clearNoticeForm(false);
     alert('공지사항이 저장되었습니다.');
   }catch(err){
     console.error(err);
-    alert('공지 저장 실패: ' + err.message + '\n\nApps Script에 saveNotice 액션과 Notice 탭이 추가되어 있는지 확인해주세요.');
+    alert('공지 저장 실패: ' + err.message + '\n\n기존 DailyReport API를 사용해 저장하도록 수정된 버전입니다. Apps Script 재배포 없이도 동작해야 합니다.');
   }
 }
 
@@ -741,16 +783,18 @@ function editNotice(id){
 
 async function deleteNotice(id){
   const adminKey = noticeAdminKey.value.trim();
-  if(!adminKey) return alert('Admin Code를 입력하세요.');
+  if(adminKey !== 'xo0318') return alert('Admin Code가 올바르지 않습니다.');
+  const n = notices.find(x => String(x.id).trim() === String(id).trim());
+  if(!n) return alert('삭제할 공지를 찾을 수 없습니다.');
   if(!confirm('이 공지를 삭제할까요?')) return;
   try{
-    await apiPost('deleteNotice', {id, adminKey});
+    await apiPost('deleteDailyReport', {date:n.start, company:noticeCompany(n.id)});
     await loadNoticesFromSheet();
     clearNoticeForm(false);
     alert('공지사항이 삭제되었습니다.');
   }catch(err){
     console.error(err);
-    alert('공지 삭제 실패: ' + err.message + '\n\nApps Script에 deleteNotice 액션이 추가되어 있는지 확인해주세요.');
+    alert('공지 삭제 실패: ' + err.message);
   }
 }
 
@@ -766,6 +810,7 @@ function renderNoticeList(){
       <div class="travel-actions"><button class="secondary" onclick="editNotice('${escapeHtml(n.id)}')">수정</button><button class="danger" onclick="deleteNotice('${escapeHtml(n.id)}')">삭제</button></div>
     </div>`).join('') : '<p class="notice">등록된 공지사항이 없습니다.</p>';
 }
+
 
 function printReport(){ window.print(); }
 document.addEventListener('change', e=>{ if(e.target && e.target.id === 'reportDate') loadReportForDate(e.target.value); });
